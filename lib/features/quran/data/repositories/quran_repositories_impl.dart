@@ -11,7 +11,7 @@ class QuranRepositoriesImpl implements QuranRepositories {
 
   @override
   Future<Either<Failure, QuranModel>> getQuran({
-    void Function(int, int)? onReceiveProgress,
+    void Function(int progress)? onReceiveProgress,
   }) async {
     try {
       final result = await _quranRemoteDatasources.getQuran(

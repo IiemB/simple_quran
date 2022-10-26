@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'package:json_cache/json_cache.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_quran/core/core.dart';
 
@@ -15,5 +14,3 @@ class SharedPrefs {
 }
 
 final sharedPrefs = getIt<SharedPrefs>().prefs;
-
-final jsonCache = JsonCachePrefs(sharedPrefs);

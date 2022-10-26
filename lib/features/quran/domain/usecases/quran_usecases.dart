@@ -15,7 +15,7 @@ class $GetQuran {
   const $GetQuran();
 
   Future<Either<Failure, QuranModel>> call({
-    void Function(int, int)? onReceiveProgress,
+    void Function(int progress)? onReceiveProgress,
   }) =>
       _repositories.getQuran(onReceiveProgress: onReceiveProgress);
 }

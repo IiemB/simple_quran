@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 extension NumberConverter on num {
   static const Map<String, String> arabicDigits = <String, String>{
     '0': '\u0660',
@@ -20,4 +23,30 @@ extension NumberConverter on num {
     }
     return sb.toString();
   }
+}
+
+extension CroasterThemeData on ThemeData {
+  ThemeData get modified => copyWith(
+        textTheme: textTheme.copyWith(
+          bodyText2: textTheme.bodyText2?.copyWith(
+            fontSize: 14.sp,
+          ),
+        ),
+        listTileTheme: listTileTheme.copyWith(
+          iconColor: colorScheme.onBackground,
+        ),
+        snackBarTheme: snackBarTheme.copyWith(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+        ),
+        appBarTheme: appBarTheme.copyWith(
+          centerTitle: true,
+          color: scaffoldBackgroundColor.withOpacity(0.8),
+          titleTextStyle: textTheme.headline5?.copyWith(
+            fontWeight: FontWeight.w500,
+            fontSize: 24.sp,
+          ),
+        ),
+      );
 }

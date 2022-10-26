@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_quran/features/quran/quran.dart';
+import 'package:simple_quran/features/settings/settings.dart';
 import 'package:simple_quran/utils/utils.dart';
 
 class QuranPage extends StatelessWidget {
@@ -18,16 +19,23 @@ class QuranPage extends StatelessWidget {
               width: 240,
             ),
           ),
-          loaded: (value) => CustomScrollView(
-            slivers: [
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) =>
-                      SurahCard(surahModel: value.quranModel.surahs[index]),
-                  childCount: value.quranModel.surahs.length,
+          loaded: (value) => Scrollbar(
+            radius: const Radius.circular(4),
+            child: CustomScrollView(
+              slivers: [
+                const SliverAppBar(
+                  floating: true,
+                  actions: [SettingsButton()],
                 ),
-              )
-            ],
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) =>
+                        SurahCard(surahModel: value.quranModel.surahs[index]),
+                    childCount: value.quranModel.surahs.length,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

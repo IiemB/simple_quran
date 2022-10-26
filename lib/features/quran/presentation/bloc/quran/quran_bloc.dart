@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,11 +19,8 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     emit(const QuranState.loading());
 
     final result = await QuranUsecases.getQuran(
-      onReceiveProgress: (p0, p1) {
-        final progress = ((p0 / 4671961) * 100).toInt();
-        log(progress.toString());
-        emit(QuranState.loading(progress: progress));
-      },
+      onReceiveProgress: (progress) =>
+          emit(QuranState.loading(progress: progress)),
     );
 
     result.fold(

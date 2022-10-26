@@ -12,18 +12,16 @@ class AyahCard extends StatelessWidget {
     var text = ayahModel.text;
 
     if (ayahModel.numberInSurah == 1 && ayahModel.number != 1) {
-      text = text.replaceAll('بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ', '');
+      text = text.replaceAll(BASMALAH, '');
     }
 
-    return Card(
-      child: ListTile(
-        title: Text(
-          '$text ${ayahModel.numberInSurah.toArabicDigits()}',
-          textDirection: TextDirection.rtl,
-          style: TextStyle(
-            fontFamily: FontFamily.isepMisbah,
-            fontSize: 24.sp,
-          ),
+    return ListTile(
+      title: Text(
+        '$text ${ayahModel.numberInSurah.toArabicDigits()}',
+        textDirection: TextDirection.rtl,
+        style: TextStyle(
+          fontFamily: FontFamily.isepMisbah,
+          fontSize: 24.sp,
         ),
       ),
     );

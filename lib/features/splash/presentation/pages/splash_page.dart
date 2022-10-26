@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_packages/i_packages.dart';
@@ -12,52 +13,86 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<QuranBloc, QuranState>(
-      bloc: BlocProvider.of<QuranBloc>(context)
-        ..add(const QuranEvent.loadQuran()),
       listener: (context, state) => state.mapOrNull<void>(
         loaded: (value) => 2.seconds.whenComplete(
-              () => appRoutes.router.pushAndPopUntil(
+              () => context.router.pushAndPopUntil(
                 const QuranRoute(),
                 predicate: (route) => false,
               ),
             ),
       ),
       child: Scaffold(
-        body: Center(
-          child: Assets.icons.icon.image(
-            width: 240,
-          ),
-        ),
-        bottomNavigationBar: SizedBox(
-          height: kToolbarHeight,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: BlocBuilder<QuranBloc, QuranState>(
-                builder: (context, state) => Column(
-                  children: [
-                    state.maybeMap(
-                      orElse: () => const LinearProgressIndicator(),
-                      loading: (value) => LinearProgressIndicator(
-                        value: value.progress?.toDouble(),
-                      ),
-                    ),
-                    state.maybeMap(
+        backgroundColor: context.theme.colorScheme.secondary,
+        body: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            BlocBuilder<QuranBloc, QuranState>(
+              buildWhen: (previous, current) => current.maybeMap(
+                orElse: () => false,
+                loading: (value) => true,
+              ),
+              builder: (context, state) => state.maybeMap(
+                orElse: () => const SizedBox(),
+                loading: (value) {
+                  final progress = value.progress;
+
+                  if (progress == null) {
+                    return const SizedBox();
+                  }
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 100),
+                    height: context.height * (progress / 100),
+                    color: context.theme.scaffoldBackgroundColor,
+                  );
+                },
+              ),
+            ),
+            Center(
+              child: Column(
+                children: [
+                  const Spacer(),
+                  Assets.icons.icon.image(width: 240),
+                  const Spacer(),
+                  BlocBuilder<QuranBloc, QuranState>(
+                    builder: (context, state) => state.maybeMap(
                       orElse: () => const Text(''),
+                      error: (value) => Column(
+                        children: [
+                          const Text('Failed to load data'),
+                          const IGap(dimension: 8),
+                          OutlinedButton(
+                            onPressed: () => BlocProvider.of<QuranBloc>(context)
+                                .add(const QuranEvent.loadQuran()),
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              child: Text('Retry'),
+                            ),
+                          ),
+                        ],
+                      ),
                       loading: (value) {
                         final progress = value.progress;
 
                         if (progress == null) {
                           return const Text('');
                         }
-                        return Text('Loading data $progress');
+                        return Text(
+                          'Loading data $progress%',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: progress <= 4
+                                ? context.theme.colorScheme.onSecondary
+                                : null,
+                          ),
+                        );
                       },
                     ),
-                  ],
-                ),
+                  ),
+                  IGap(dimension: context.height * (2 / 100))
+                ],
               ),
             ),
-          ),
+          ],
         ),
       ),
     );

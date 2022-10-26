@@ -14,6 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   dio: ^4.0.6
+  flex_color_scheme: ^5.1.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
@@ -22,13 +23,14 @@ dependencies:
   flutter_screenutil: ^5.5.4
   freezed_annotation: ^2.2.0
   get_it: ^7.2.0
+  google_fonts: ^3.0.1
   i_packages:
     path: ../i_packages
   in_app_update: ^3.0.0
   injectable: ^1.5.3
   json_annotation: ^4.7.0
-  json_cache: ^1.4.2
   package_info_plus: ^3.0.1
+  path_provider: ^2.0.11
   share_plus: ^6.0.1
   shared_preferences: ^2.0.15
   vibration: ^1.7.6

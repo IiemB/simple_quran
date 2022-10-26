@@ -11,23 +11,21 @@ class SurahCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        onTap: () => context.router.push(SurahRoute(surahModel: surahModel)),
-        title: Text(
-          '${surahModel.name} - ${surahModel.englishName}',
-          textDirection: TextDirection.rtl,
-          style: TextStyle(
-            fontFamily: FontFamily.isepMisbah,
-            fontSize: 24.sp,
-          ),
+    return ListTile(
+      onTap: () => context.router.push(SurahRoute(surahModel: surahModel)),
+      title: Text(
+        surahModel.name,
+        textDirection: TextDirection.rtl,
+        style: TextStyle(
+          fontFamily: FontFamily.isepMisbah,
+          fontSize: 24.sp,
         ),
-        leading: Text(
-          surahModel.number.toArabicDigits(),
-          style: TextStyle(
-            fontFamily: FontFamily.isepMisbah,
-            fontSize: 24.sp,
-          ),
+      ),
+      leading: Text(
+        surahModel.number.toArabicDigits(),
+        style: TextStyle(
+          fontFamily: FontFamily.isepMisbah,
+          fontSize: 24.sp,
         ),
       ),
     );

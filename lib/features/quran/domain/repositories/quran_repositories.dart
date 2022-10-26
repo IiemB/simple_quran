@@ -4,6 +4,6 @@ import 'package:simple_quran/features/quran/quran.dart';
 
 abstract class QuranRepositories {
   Future<Either<Failure, QuranModel>> getQuran({
-    void Function(int, int)? onReceiveProgress,
+    void Function(int progress)? onReceiveProgress,
   });
 }

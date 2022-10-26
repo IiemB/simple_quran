@@ -1,5 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:simple_quran/common/common.dart';
 import 'package:simple_quran/features/quran/quran.dart';
 import 'package:simple_quran/utils/utils.dart';
@@ -14,24 +19,53 @@ class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
     ),
   );
 
+  static const _quranEdition = 'quran-uthmani';
+
   @override
   Future<QuranModel> getQuran({
-    void Function(int, int)? onReceiveProgress,
+    void Function(int progress)? onReceiveProgress,
   }) async {
     try {
-      const edition = '/quran-uthmani';
+      final savedQuranSize = sharedPrefs.getInt(QURAN_SIZE) ?? 4671961;
 
-      final quranJsonCache = await jsonCache.value(edition);
+      var newQuranSize = 0;
 
-      if (quranJsonCache != null) {
-        final data = QuranModel.fromJson(quranJsonCache);
+      const editionPath = '/$_quranEdition';
+
+      final cacheDirectory = await getTemporaryDirectory();
+
+      final editionJsonCachePath = '${cacheDirectory.path}/$_quranEdition.json';
+
+      final editionJsonCacheFile = File(editionJsonCachePath);
+
+      if (await editionJsonCacheFile.exists()) {
+        final quranJsonString = await editionJsonCacheFile.readAsString();
+
+        final quranJson = jsonDecode(quranJsonString) as Map<String, dynamic>;
+
+        final data = QuranModel.fromJson(quranJson);
+
+        final random = Random();
+
+        for (var i = 1; i < 101; i++) {
+          await Future.delayed(
+            Duration(milliseconds: random.nextInt(90) + 10),
+            () => onReceiveProgress?.call(i),
+          );
+        }
 
         return data;
       }
 
       final resp = await _dio.get(
-        edition,
-        onReceiveProgress: onReceiveProgress,
+        editionPath,
+        onReceiveProgress: (recv, _) {
+          final progress = ((recv / savedQuranSize) * 100).toInt();
+
+          newQuranSize = recv;
+
+          onReceiveProgress?.call(progress);
+        },
       );
 
       final data = QuranResponeDataModel.fromJson(resp.data).data;
@@ -40,7 +74,11 @@ class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
         throw Exception('Failed to load Quran');
       }
 
-      await jsonCache.refresh(edition, data.toJson());
+      await sharedPrefs.setInt(QURAN_SIZE, newQuranSize);
+
+      await editionJsonCacheFile.writeAsString(
+        const JsonEncoder.withIndent('  ').convert(data.toJson()),
+      );
 
       return data;
     } on DioError catch (e) {
