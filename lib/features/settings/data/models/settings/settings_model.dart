@@ -8,7 +8,7 @@ part 'settings_model.g.dart';
 class SettingsModel with _$SettingsModel {
   factory SettingsModel({
     @Default(AppThemes.light) AppThemes appThemes,
-    @Default(24) int textSize,
+    @Default(24) double textSize,
   }) = _SettingsModel;
 
   factory SettingsModel.fromJson(Map<String, dynamic> json) =>

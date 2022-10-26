@@ -18,9 +18,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, _) => MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) => QuranBloc()..add(const QuranEvent.loadQuran()),
-          ),
+          BlocProvider(create: (context) => QuranBloc()),
           BlocProvider(create: (context) => SettingsCubit()..loadSettings()),
         ],
         child: BlocBuilder<SettingsCubit, SettingsModel>(

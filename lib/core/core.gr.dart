@@ -24,9 +24,13 @@ class _$_AppRouter extends RootStackRouter {
       );
     },
     QuranRoute.name: (routeData) {
+      final args = routeData.argsAs<QuranRouteArgs>();
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const QuranPage(),
+        child: QuranPage(
+          key: args.key,
+          quranModel: args.quranModel,
+        ),
       );
     },
     SurahRoute.name: (routeData) {
@@ -72,14 +76,36 @@ class SplashRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [QuranPage]
-class QuranRoute extends PageRouteInfo<void> {
-  const QuranRoute()
-      : super(
+class QuranRoute extends PageRouteInfo<QuranRouteArgs> {
+  QuranRoute({
+    Key? key,
+    required QuranModel quranModel,
+  }) : super(
           QuranRoute.name,
           path: 'quran',
+          args: QuranRouteArgs(
+            key: key,
+            quranModel: quranModel,
+          ),
         );
 
   static const String name = 'QuranRoute';
+}
+
+class QuranRouteArgs {
+  const QuranRouteArgs({
+    this.key,
+    required this.quranModel,
+  });
+
+  final Key? key;
+
+  final QuranModel quranModel;
+
+  @override
+  String toString() {
+    return 'QuranRouteArgs{key: $key, quranModel: $quranModel}';
+  }
 }
 
 /// generated route for

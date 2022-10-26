@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:i_packages/i_packages.dart';
 import 'package:simple_quran/features/quran/quran.dart';
 
 part 'quran_event.dart';
@@ -16,6 +17,8 @@ class QuranBloc extends Bloc<QuranEvent, QuranState> {
     _LoadQuran event,
     Emitter<QuranState> emit,
   ) async {
+    await event.delay.seconds;
+
     emit(const QuranState.loading());
 
     final result = await QuranUsecases.getQuran(

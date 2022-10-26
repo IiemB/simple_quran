@@ -10,7 +10,7 @@ _$_SettingsModel _$$_SettingsModelFromJson(Map<String, dynamic> json) =>
     _$_SettingsModel(
       appThemes: $enumDecodeNullable(_$AppThemesEnumMap, json['appThemes']) ??
           AppThemes.light,
-      textSize: json['textSize'] as int? ?? 24,
+      textSize: (json['textSize'] as num?)?.toDouble() ?? 24,
     );
 
 Map<String, dynamic> _$$_SettingsModelToJson(_$_SettingsModel instance) =>

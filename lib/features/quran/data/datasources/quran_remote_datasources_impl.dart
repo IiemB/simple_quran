@@ -49,7 +49,7 @@ class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
 
         for (var i = 1; i < 101; i++) {
           await Future.delayed(
-            Duration(milliseconds: random.nextInt(90) + 10),
+            Duration(milliseconds: random.nextInt(40) + 10),
             () => onReceiveProgress?.call(i),
           );
         }

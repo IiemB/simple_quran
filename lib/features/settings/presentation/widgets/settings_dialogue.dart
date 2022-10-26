@@ -10,24 +10,39 @@ class SettingsDialogue extends StatelessWidget {
   Widget build(BuildContext context) {
     return IBaseSheet(
       isDraggable: false,
-      content: AppThemes.values
-          .map(
-            (appThemes) => Card(
-              child: BlocBuilder<SettingsCubit, SettingsModel>(
-                builder: (context, state) {
-                  return ListTile(
-                    selected: state.appThemes == appThemes,
-                    selectedTileColor: context.theme.primaryColor,
-                    selectedColor: context.theme.colorScheme.onPrimary,
-                    onTap: () => BlocProvider.of<SettingsCubit>(context)
-                        .updateSettings(state.copyWith(appThemes: appThemes)),
-                    title: Text(appThemes.themeName),
-                  );
-                },
-              ),
-            ),
-          )
-          .toList(),
+      content: [
+        BlocBuilder<SettingsCubit, SettingsModel>(
+          builder: (context, state) => Slider(
+            value: state.textSize,
+            min: 16,
+            max: 50,
+            onChanged: (value) => BlocProvider.of<SettingsCubit>(context)
+                .updateSettings(state.copyWith(textSize: value)),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: AppThemes.values
+              .map(
+                (appThemes) => BlocBuilder<SettingsCubit, SettingsModel>(
+                  builder: (context, state) {
+                    final isSelected = state.appThemes == appThemes;
+                    return Card(
+                      color: isSelected ? context.theme.primaryColor : null,
+                      child: IconButton(
+                        onPressed: () => BlocProvider.of<SettingsCubit>(context)
+                            .updateSettings(
+                          state.copyWith(appThemes: appThemes),
+                        ),
+                        icon: Icon(appThemes.iconData),
+                      ),
+                    );
+                  },
+                ),
+              )
+              .toList(),
+        )
+      ],
     );
   }
 }

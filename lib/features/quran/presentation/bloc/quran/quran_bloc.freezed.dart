@@ -16,19 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$QuranEvent {
+  int get delay => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadQuran,
+    required TResult Function(int delay) loadQuran,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadQuran,
+    TResult? Function(int delay)? loadQuran,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadQuran,
+    TResult Function(int delay)? loadQuran,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +49,10 @@ mixin _$QuranEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $QuranEventCopyWith<QuranEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -55,6 +60,8 @@ abstract class $QuranEventCopyWith<$Res> {
   factory $QuranEventCopyWith(
           QuranEvent value, $Res Function(QuranEvent) then) =
       _$QuranEventCopyWithImpl<$Res, QuranEvent>;
+  @useResult
+  $Res call({int delay});
 }
 
 /// @nodoc
@@ -66,13 +73,30 @@ class _$QuranEventCopyWithImpl<$Res, $Val extends QuranEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? delay = null,
+  }) {
+    return _then(_value.copyWith(
+      delay: null == delay
+          ? _value.delay
+          : delay // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$_LoadQuranCopyWith<$Res> {
+abstract class _$$_LoadQuranCopyWith<$Res>
+    implements $QuranEventCopyWith<$Res> {
   factory _$$_LoadQuranCopyWith(
           _$_LoadQuran value, $Res Function(_$_LoadQuran) then) =
       __$$_LoadQuranCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int delay});
 }
 
 /// @nodoc
@@ -82,51 +106,76 @@ class __$$_LoadQuranCopyWithImpl<$Res>
   __$$_LoadQuranCopyWithImpl(
       _$_LoadQuran _value, $Res Function(_$_LoadQuran) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? delay = null,
+  }) {
+    return _then(_$_LoadQuran(
+      delay: null == delay
+          ? _value.delay
+          : delay // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_LoadQuran implements _LoadQuran {
-  const _$_LoadQuran();
+  const _$_LoadQuran({this.delay = 0});
+
+  @override
+  @JsonKey()
+  final int delay;
 
   @override
   String toString() {
-    return 'QuranEvent.loadQuran()';
+    return 'QuranEvent.loadQuran(delay: $delay)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_LoadQuran);
+        (other.runtimeType == runtimeType &&
+            other is _$_LoadQuran &&
+            (identical(other.delay, delay) || other.delay == delay));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, delay);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LoadQuranCopyWith<_$_LoadQuran> get copyWith =>
+      __$$_LoadQuranCopyWithImpl<_$_LoadQuran>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadQuran,
+    required TResult Function(int delay) loadQuran,
   }) {
-    return loadQuran();
+    return loadQuran(delay);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadQuran,
+    TResult? Function(int delay)? loadQuran,
   }) {
-    return loadQuran?.call();
+    return loadQuran?.call(delay);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadQuran,
+    TResult Function(int delay)? loadQuran,
     required TResult orElse(),
   }) {
     if (loadQuran != null) {
-      return loadQuran();
+      return loadQuran(delay);
     }
     return orElse();
   }
@@ -161,7 +210,14 @@ class _$_LoadQuran implements _LoadQuran {
 }
 
 abstract class _LoadQuran implements QuranEvent {
-  const factory _LoadQuran() = _$_LoadQuran;
+  const factory _LoadQuran({final int delay}) = _$_LoadQuran;
+
+  @override
+  int get delay;
+  @override
+  @JsonKey(ignore: true)
+  _$$_LoadQuranCopyWith<_$_LoadQuran> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

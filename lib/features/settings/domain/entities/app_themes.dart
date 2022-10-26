@@ -6,21 +6,29 @@ enum AppThemes {
   light(
     themeName: 'Light',
     themeMode: ThemeMode.light,
+    iconData: Icons.light_mode,
   ),
   dark(
     themeName: 'Dark',
     themeMode: ThemeMode.dark,
+    iconData: Icons.dark_mode_outlined,
   ),
   darkAmoled(
     themeName: 'Dark Amoled',
     themeMode: ThemeMode.dark,
+    iconData: Icons.dark_mode,
   ),
   ;
 
-  const AppThemes({required this.themeName, required this.themeMode});
+  const AppThemes({
+    required this.themeName,
+    required this.themeMode,
+    required this.iconData,
+  });
 
   final String themeName;
   final ThemeMode themeMode;
+  final IconData iconData;
 }
 
 const _useMaterial3 = true;

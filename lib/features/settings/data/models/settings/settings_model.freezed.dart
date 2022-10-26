@@ -21,7 +21,7 @@ SettingsModel _$SettingsModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SettingsModel {
   AppThemes get appThemes => throw _privateConstructorUsedError;
-  int get textSize => throw _privateConstructorUsedError;
+  double get textSize => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $SettingsModelCopyWith<$Res> {
           SettingsModel value, $Res Function(SettingsModel) then) =
       _$SettingsModelCopyWithImpl<$Res, SettingsModel>;
   @useResult
-  $Res call({AppThemes appThemes, int textSize});
+  $Res call({AppThemes appThemes, double textSize});
 }
 
 /// @nodoc
@@ -62,7 +62,7 @@ class _$SettingsModelCopyWithImpl<$Res, $Val extends SettingsModel>
       textSize: null == textSize
           ? _value.textSize
           : textSize // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ) as $Val);
   }
 }
@@ -75,7 +75,7 @@ abstract class _$$_SettingsModelCopyWith<$Res>
       __$$_SettingsModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AppThemes appThemes, int textSize});
+  $Res call({AppThemes appThemes, double textSize});
 }
 
 /// @nodoc
@@ -100,7 +100,7 @@ class __$$_SettingsModelCopyWithImpl<$Res>
       textSize: null == textSize
           ? _value.textSize
           : textSize // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -118,7 +118,7 @@ class _$_SettingsModel implements _SettingsModel {
   final AppThemes appThemes;
   @override
   @JsonKey()
-  final int textSize;
+  final double textSize;
 
   @override
   String toString() {
@@ -155,7 +155,7 @@ class _$_SettingsModel implements _SettingsModel {
 }
 
 abstract class _SettingsModel implements SettingsModel {
-  factory _SettingsModel({final AppThemes appThemes, final int textSize}) =
+  factory _SettingsModel({final AppThemes appThemes, final double textSize}) =
       _$_SettingsModel;
 
   factory _SettingsModel.fromJson(Map<String, dynamic> json) =
@@ -164,7 +164,7 @@ abstract class _SettingsModel implements SettingsModel {
   @override
   AppThemes get appThemes;
   @override
-  int get textSize;
+  double get textSize;
   @override
   @JsonKey(ignore: true)
   _$$_SettingsModelCopyWith<_$_SettingsModel> get copyWith =>
