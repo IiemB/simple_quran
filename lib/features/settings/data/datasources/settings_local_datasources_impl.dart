@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:simple_quran/features/settings/settings.dart';
@@ -11,6 +12,10 @@ class SettingsLocalDatasourcesImpl implements SettingsLocalDatasources {
   @override
   Future<SettingsModel> loadSettings() async {
     try {
+      if (kIsWeb) {
+        return SettingsModel();
+      }
+
       final cacheDirectory = await getTemporaryDirectory();
 
       final settingsJsonCachePath = '${cacheDirectory.path}/$SETTINGS.json';
@@ -37,6 +42,10 @@ class SettingsLocalDatasourcesImpl implements SettingsLocalDatasources {
   @override
   Future<void> saveSettings(SettingsModel settingsModel) async {
     try {
+      if (kIsWeb) {
+        return;
+      }
+
       final cacheDirectory = await getTemporaryDirectory();
 
       final settingsJsonCachePath = '${cacheDirectory.path}/$SETTINGS.json';

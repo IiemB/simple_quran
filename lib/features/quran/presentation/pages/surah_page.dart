@@ -5,16 +5,30 @@ import 'package:i_packages/i_packages.dart';
 import 'package:simple_quran/features/quran/quran.dart';
 import 'package:simple_quran/features/settings/settings.dart';
 import 'package:simple_quran/utils/utils.dart';
+import 'package:simple_quran/widgets/widgets.dart';
 
-class SurahPage extends StatelessWidget {
+class SurahPage extends StatefulWidget {
   static const routeName = 'surah';
 
   final SurahModel surahModel;
   const SurahPage({super.key, required this.surahModel});
 
   @override
+  State<SurahPage> createState() => _SurahPageState();
+}
+
+class _SurahPageState extends State<SurahPage> {
+  final _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final ayahs = surahModel.ayahs.map((ayahModel) {
+    final ayahs = widget.surahModel.ayahs.map((ayahModel) {
       var text = ayahModel.text;
 
       if (ayahModel.numberInSurah == 1 && ayahModel.number != 1) {
@@ -30,12 +44,15 @@ class SurahPage extends StatelessWidget {
     return Scaffold(
       body: Scrollbar(
         radius: const Radius.circular(4),
+        controller: _scrollController,
         child: CustomScrollView(
+          controller: _scrollController,
           slivers: [
             SliverAppBar(
               floating: true,
+              leading: const CustomBackButton(),
               title: Text(
-                surahModel.name,
+                widget.surahModel.name,
                 textDirection: TextDirection.rtl,
                 style: TextStyle(
                   fontFamily: FontFamily.isepMisbah,

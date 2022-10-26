@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:simple_quran/common/common.dart';
@@ -32,6 +33,31 @@ class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
 
       const editionPath = '/$_quranEdition';
 
+      Future<Response<dynamic>> getData() => _dio.get(
+            editionPath,
+            onReceiveProgress: (recv, _) {
+              final progress = ((recv / savedQuranSize) * 100).toInt();
+
+              newQuranSize = recv;
+
+              onReceiveProgress?.call(progress);
+            },
+          );
+
+      if (kIsWeb) {
+        final resp = await getData();
+
+        final data = QuranResponeDataModel.fromJson(resp.data).data;
+
+        if (data == null) {
+          throw Exception('Failed to load Quran');
+        }
+
+        await sharedPrefs.setInt(QURAN_SIZE, newQuranSize);
+
+        return data;
+      }
+
       final cacheDirectory = await getTemporaryDirectory();
 
       final editionJsonCachePath = '${cacheDirectory.path}/$_quranEdition.json';
@@ -57,16 +83,7 @@ class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
         return data;
       }
 
-      final resp = await _dio.get(
-        editionPath,
-        onReceiveProgress: (recv, _) {
-          final progress = ((recv / savedQuranSize) * 100).toInt();
-
-          newQuranSize = recv;
-
-          onReceiveProgress?.call(progress);
-        },
-      );
+      final resp = await getData();
 
       final data = QuranResponeDataModel.fromJson(resp.data).data;
 
