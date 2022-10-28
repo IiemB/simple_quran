@@ -27,15 +27,19 @@ class SettingsDialogue extends StatelessWidget {
                 (appThemes) => BlocBuilder<SettingsCubit, SettingsModel>(
                   builder: (context, state) {
                     final isSelected = state.appThemes == appThemes;
-                    return Card(
-                      color: isSelected ? context.theme.primaryColor : null,
-                      child: IconButton(
-                        onPressed: () => BlocProvider.of<SettingsCubit>(context)
-                            .updateSettings(
-                          state.copyWith(appThemes: appThemes),
-                        ),
-                        icon: Icon(appThemes.iconData),
+                    return IconButton(
+                      style: IconButton.styleFrom(
+                        foregroundColor: isSelected
+                            ? context.theme.colorScheme.onPrimary
+                            : null,
+                        backgroundColor:
+                            isSelected ? context.theme.primaryColor : null,
                       ),
+                      onPressed: () => BlocProvider.of<SettingsCubit>(context)
+                          .updateSettings(
+                        state.copyWith(appThemes: appThemes),
+                      ),
+                      icon: Icon(appThemes.iconData),
                     );
                   },
                 ),
