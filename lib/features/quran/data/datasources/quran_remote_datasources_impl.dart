@@ -7,19 +7,12 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:simple_quran/common/common.dart';
+import 'package:simple_quran/core/core.dart';
 import 'package:simple_quran/features/quran/quran.dart';
 import 'package:simple_quran/utils/utils.dart';
 
 @LazySingleton(as: QuranRemoteDatasources)
 class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
-  final _dio = Dio(
-    BaseOptions(
-      baseUrl: QURAN_API_BASE_URL,
-      connectTimeout: 600000,
-      receiveTimeout: 600000,
-    ),
-  );
-
   static const _quranEdition = 'quran-uthmani';
 
   @override
@@ -33,7 +26,7 @@ class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
 
       const editionPath = '/$_quranEdition';
 
-      Future<Response<dynamic>> getData() => _dio.get(
+      Future<Response<dynamic>> getData() => dio.get(
             editionPath,
             onReceiveProgress: (recv, _) {
               final progress = ((recv / savedQuranSize) * 100).toInt();
@@ -93,9 +86,7 @@ class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
 
       await sharedPrefs.setInt(QURAN_SIZE, newQuranSize);
 
-      await editionJsonCacheFile.writeAsString(
-        const JsonEncoder.withIndent('  ').convert(data.toJson()),
-      );
+      await JsonCacheManager.saveJson(_quranEdition, data.toJson());
 
       return data;
     } on DioError catch (e) {
