@@ -8,15 +8,22 @@ import 'package:simple_quran/features/quran/quran.dart';
 import 'package:simple_quran/features/settings/settings.dart';
 import 'package:simple_quran/utils/utils.dart';
 
-class SurahCard extends StatelessWidget {
-  final SurahModel surahModel;
-  const SurahCard({super.key, required this.surahModel});
+class ChapterCard extends StatelessWidget {
+  final Chapter chapter;
+  final int chapterNumber;
+
+  const ChapterCard({
+    super.key,
+    required this.chapter,
+    required this.chapterNumber,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsCubit, SettingsModel>(
+      buildWhen: (previous, current) => previous.textSize != current.textSize,
       builder: (context, state) => InkWell(
-        onTap: () => context.router.push(SurahRoute(surahModel: surahModel)),
+        onTap: () => context.router.push(ChapterRoute(chapter: chapter)),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: BlocBuilder<SettingsCubit, SettingsModel>(
@@ -24,9 +31,9 @@ class SurahCard extends StatelessWidget {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(surahModel.number.toArabicDigits()),
+                  Text(chapterNumber.toArabicDigits()),
                   Text(
-                    surahModel.name,
+                    '${chapter.nameArabic}',
                     textDirection: TextDirection.rtl,
                   )
                 ]

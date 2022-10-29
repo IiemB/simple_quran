@@ -211,13 +211,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.1"
-  cross_file:
-    dependency: transitive
-    description:
-      name: cross_file
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.3.3+2"
   crypto:
     dependency: transitive
     description:
@@ -478,13 +471,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.2.2"
-  in_app_update:
-    dependency: "direct main"
-    description:
-      name: in_app_update
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
   injectable:
     dependency: "direct main"
     description:
@@ -744,20 +730,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.5"
-  share_plus:
-    dependency: "direct main"
-    description:
-      name: share_plus
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.0.1"
-  share_plus_platform_interface:
-    dependency: transitive
-    description:
-      name: share_plus_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.1.2"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -1015,13 +987,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
-  vibration:
-    dependency: "direct main"
-    description:
-      name: vibration
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.7.6"
   wakelock:
     dependency: "direct main"
     description:
@@ -1078,6 +1043,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  window_size:
+    dependency: "direct main"
+    description:
+      path: "plugins/window_size"
+      ref: HEAD
+      resolved-ref: "17d4710c17f4913137e7ec931f6e71eaef443363"
+      url: "https://github.com/google/flutter-desktop-embedding"
+    source: git
+    version: "0.1.0"
   xdg_directories:
     dependency: transitive
     description:

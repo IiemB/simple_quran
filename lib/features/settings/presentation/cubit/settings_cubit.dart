@@ -1,20 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:simple_quran/features/settings/domain/usecases/settings_usecases.dart';
 import 'package:simple_quran/features/settings/settings.dart';
 
 class SettingsCubit extends Cubit<SettingsModel> {
-  SettingsCubit() : super(SettingsModel());
+  final SettingsModel? initial;
 
-  void loadSettings() async {
-    final savedSettings = await SettingsUsecases.loadSettings()
-        .then((value) => value.fold((l) => null, (r) => r));
-
-    if (savedSettings == null) {
-      return;
-    }
-
-    emit(savedSettings);
-  }
+  SettingsCubit({this.initial}) : super(initial ?? SettingsModel());
 
   void updateSettings(SettingsModel settingsModel) async {
     emit(settingsModel);

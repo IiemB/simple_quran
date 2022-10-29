@@ -40,8 +40,8 @@ void configureDependencies() => $initGetIt(getIt);
       path: QuranPage.routeName,
     ),
     AutoRoute(
-      page: SurahPage,
-      path: SurahPage.routeName,
+      page: ChapterPage,
+      path: ChapterPage.routeName,
     ),
   ],
 )

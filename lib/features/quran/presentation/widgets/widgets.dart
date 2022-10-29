@@ -1,2 +1,1 @@
-export 'ayah_card.dart';
-export 'surah_card.dart';
+export 'chapter_card.dart';

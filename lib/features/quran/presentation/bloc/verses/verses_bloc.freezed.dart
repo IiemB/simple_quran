@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'quran_bloc.dart';
+part of 'verses_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,59 +15,65 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$QuranEvent {
-  int get delay => throw _privateConstructorUsedError;
+mixin _$VersesEvent {
+  int get chapterNumber => throw _privateConstructorUsedError;
+  QuranEdition get edition => throw _privateConstructorUsedError;
+  bool get force => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int delay) loadQuran,
+    required TResult Function(
+            int chapterNumber, QuranEdition edition, bool force)
+        getVerses,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int delay)? loadQuran,
+    TResult? Function(int chapterNumber, QuranEdition edition, bool force)?
+        getVerses,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int delay)? loadQuran,
+    TResult Function(int chapterNumber, QuranEdition edition, bool force)?
+        getVerses,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoadQuran value) loadQuran,
+    required TResult Function(_GetVerses value) getVerses,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadQuran value)? loadQuran,
+    TResult? Function(_GetVerses value)? getVerses,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadQuran value)? loadQuran,
+    TResult Function(_GetVerses value)? getVerses,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $QuranEventCopyWith<QuranEvent> get copyWith =>
+  $VersesEventCopyWith<VersesEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $QuranEventCopyWith<$Res> {
-  factory $QuranEventCopyWith(
-          QuranEvent value, $Res Function(QuranEvent) then) =
-      _$QuranEventCopyWithImpl<$Res, QuranEvent>;
+abstract class $VersesEventCopyWith<$Res> {
+  factory $VersesEventCopyWith(
+          VersesEvent value, $Res Function(VersesEvent) then) =
+      _$VersesEventCopyWithImpl<$Res, VersesEvent>;
   @useResult
-  $Res call({int delay});
+  $Res call({int chapterNumber, QuranEdition edition, bool force});
 }
 
 /// @nodoc
-class _$QuranEventCopyWithImpl<$Res, $Val extends QuranEvent>
-    implements $QuranEventCopyWith<$Res> {
-  _$QuranEventCopyWithImpl(this._value, this._then);
+class _$VersesEventCopyWithImpl<$Res, $Val extends VersesEvent>
+    implements $VersesEventCopyWith<$Res> {
+  _$VersesEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -77,105 +83,140 @@ class _$QuranEventCopyWithImpl<$Res, $Val extends QuranEvent>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? delay = null,
+    Object? chapterNumber = null,
+    Object? edition = null,
+    Object? force = null,
   }) {
     return _then(_value.copyWith(
-      delay: null == delay
-          ? _value.delay
-          : delay // ignore: cast_nullable_to_non_nullable
+      chapterNumber: null == chapterNumber
+          ? _value.chapterNumber
+          : chapterNumber // ignore: cast_nullable_to_non_nullable
               as int,
+      edition: null == edition
+          ? _value.edition
+          : edition // ignore: cast_nullable_to_non_nullable
+              as QuranEdition,
+      force: null == force
+          ? _value.force
+          : force // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_LoadQuranCopyWith<$Res>
-    implements $QuranEventCopyWith<$Res> {
-  factory _$$_LoadQuranCopyWith(
-          _$_LoadQuran value, $Res Function(_$_LoadQuran) then) =
-      __$$_LoadQuranCopyWithImpl<$Res>;
+abstract class _$$_GetVersesCopyWith<$Res>
+    implements $VersesEventCopyWith<$Res> {
+  factory _$$_GetVersesCopyWith(
+          _$_GetVerses value, $Res Function(_$_GetVerses) then) =
+      __$$_GetVersesCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int delay});
+  $Res call({int chapterNumber, QuranEdition edition, bool force});
 }
 
 /// @nodoc
-class __$$_LoadQuranCopyWithImpl<$Res>
-    extends _$QuranEventCopyWithImpl<$Res, _$_LoadQuran>
-    implements _$$_LoadQuranCopyWith<$Res> {
-  __$$_LoadQuranCopyWithImpl(
-      _$_LoadQuran _value, $Res Function(_$_LoadQuran) _then)
+class __$$_GetVersesCopyWithImpl<$Res>
+    extends _$VersesEventCopyWithImpl<$Res, _$_GetVerses>
+    implements _$$_GetVersesCopyWith<$Res> {
+  __$$_GetVersesCopyWithImpl(
+      _$_GetVerses _value, $Res Function(_$_GetVerses) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? delay = null,
+    Object? chapterNumber = null,
+    Object? edition = null,
+    Object? force = null,
   }) {
-    return _then(_$_LoadQuran(
-      delay: null == delay
-          ? _value.delay
-          : delay // ignore: cast_nullable_to_non_nullable
+    return _then(_$_GetVerses(
+      chapterNumber: null == chapterNumber
+          ? _value.chapterNumber
+          : chapterNumber // ignore: cast_nullable_to_non_nullable
               as int,
+      edition: null == edition
+          ? _value.edition
+          : edition // ignore: cast_nullable_to_non_nullable
+              as QuranEdition,
+      force: null == force
+          ? _value.force
+          : force // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_LoadQuran implements _LoadQuran {
-  const _$_LoadQuran({this.delay = 0});
+class _$_GetVerses implements _GetVerses {
+  const _$_GetVerses(
+      {required this.chapterNumber,
+      this.edition = QuranEdition.indopak,
+      this.force = false});
 
   @override
+  final int chapterNumber;
+  @override
   @JsonKey()
-  final int delay;
+  final QuranEdition edition;
+  @override
+  @JsonKey()
+  final bool force;
 
   @override
   String toString() {
-    return 'QuranEvent.loadQuran(delay: $delay)';
+    return 'VersesEvent.getVerses(chapterNumber: $chapterNumber, edition: $edition, force: $force)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoadQuran &&
-            (identical(other.delay, delay) || other.delay == delay));
+            other is _$_GetVerses &&
+            (identical(other.chapterNumber, chapterNumber) ||
+                other.chapterNumber == chapterNumber) &&
+            (identical(other.edition, edition) || other.edition == edition) &&
+            (identical(other.force, force) || other.force == force));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, delay);
+  int get hashCode => Object.hash(runtimeType, chapterNumber, edition, force);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadQuranCopyWith<_$_LoadQuran> get copyWith =>
-      __$$_LoadQuranCopyWithImpl<_$_LoadQuran>(this, _$identity);
+  _$$_GetVersesCopyWith<_$_GetVerses> get copyWith =>
+      __$$_GetVersesCopyWithImpl<_$_GetVerses>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int delay) loadQuran,
+    required TResult Function(
+            int chapterNumber, QuranEdition edition, bool force)
+        getVerses,
   }) {
-    return loadQuran(delay);
+    return getVerses(chapterNumber, edition, force);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int delay)? loadQuran,
+    TResult? Function(int chapterNumber, QuranEdition edition, bool force)?
+        getVerses,
   }) {
-    return loadQuran?.call(delay);
+    return getVerses?.call(chapterNumber, edition, force);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int delay)? loadQuran,
+    TResult Function(int chapterNumber, QuranEdition edition, bool force)?
+        getVerses,
     required TResult orElse(),
   }) {
-    if (loadQuran != null) {
-      return loadQuran(delay);
+    if (getVerses != null) {
+      return getVerses(chapterNumber, edition, force);
     }
     return orElse();
   }
@@ -183,67 +224,74 @@ class _$_LoadQuran implements _LoadQuran {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_LoadQuran value) loadQuran,
+    required TResult Function(_GetVerses value) getVerses,
   }) {
-    return loadQuran(this);
+    return getVerses(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_LoadQuran value)? loadQuran,
+    TResult? Function(_GetVerses value)? getVerses,
   }) {
-    return loadQuran?.call(this);
+    return getVerses?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_LoadQuran value)? loadQuran,
+    TResult Function(_GetVerses value)? getVerses,
     required TResult orElse(),
   }) {
-    if (loadQuran != null) {
-      return loadQuran(this);
+    if (getVerses != null) {
+      return getVerses(this);
     }
     return orElse();
   }
 }
 
-abstract class _LoadQuran implements QuranEvent {
-  const factory _LoadQuran({final int delay}) = _$_LoadQuran;
+abstract class _GetVerses implements VersesEvent {
+  const factory _GetVerses(
+      {required final int chapterNumber,
+      final QuranEdition edition,
+      final bool force}) = _$_GetVerses;
 
   @override
-  int get delay;
+  int get chapterNumber;
+  @override
+  QuranEdition get edition;
+  @override
+  bool get force;
   @override
   @JsonKey(ignore: true)
-  _$$_LoadQuranCopyWith<_$_LoadQuran> get copyWith =>
+  _$$_GetVersesCopyWith<_$_GetVerses> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-mixin _$QuranState {
+mixin _$VersesState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int? progress) loading,
-    required TResult Function(QuranModel quranModel) loaded,
-    required TResult Function(String message) error,
+    required TResult Function() loading,
+    required TResult Function(Verses data) loaded,
+    required TResult Function(String msg) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int? progress)? loading,
-    TResult? Function(QuranModel quranModel)? loaded,
-    TResult? Function(String message)? error,
+    TResult? Function()? loading,
+    TResult? Function(Verses data)? loaded,
+    TResult? Function(String msg)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int? progress)? loading,
-    TResult Function(QuranModel quranModel)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loading,
+    TResult Function(Verses data)? loaded,
+    TResult Function(String msg)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -275,16 +323,16 @@ mixin _$QuranState {
 }
 
 /// @nodoc
-abstract class $QuranStateCopyWith<$Res> {
-  factory $QuranStateCopyWith(
-          QuranState value, $Res Function(QuranState) then) =
-      _$QuranStateCopyWithImpl<$Res, QuranState>;
+abstract class $VersesStateCopyWith<$Res> {
+  factory $VersesStateCopyWith(
+          VersesState value, $Res Function(VersesState) then) =
+      _$VersesStateCopyWithImpl<$Res, VersesState>;
 }
 
 /// @nodoc
-class _$QuranStateCopyWithImpl<$Res, $Val extends QuranState>
-    implements $QuranStateCopyWith<$Res> {
-  _$QuranStateCopyWithImpl(this._value, this._then);
+class _$VersesStateCopyWithImpl<$Res, $Val extends VersesState>
+    implements $VersesStateCopyWith<$Res> {
+  _$VersesStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -301,7 +349,7 @@ abstract class _$$_InitialCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitialCopyWithImpl<$Res>
-    extends _$QuranStateCopyWithImpl<$Res, _$_Initial>
+    extends _$VersesStateCopyWithImpl<$Res, _$_Initial>
     implements _$$_InitialCopyWith<$Res> {
   __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
       : super(_value, _then);
@@ -314,7 +362,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'QuranState.initial()';
+    return 'VersesState.initial()';
   }
 
   @override
@@ -330,9 +378,9 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int? progress) loading,
-    required TResult Function(QuranModel quranModel) loaded,
-    required TResult Function(String message) error,
+    required TResult Function() loading,
+    required TResult Function(Verses data) loaded,
+    required TResult Function(String msg) error,
   }) {
     return initial();
   }
@@ -341,9 +389,9 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int? progress)? loading,
-    TResult? Function(QuranModel quranModel)? loaded,
-    TResult? Function(String message)? error,
+    TResult? Function()? loading,
+    TResult? Function(Verses data)? loaded,
+    TResult? Function(String msg)? error,
   }) {
     return initial?.call();
   }
@@ -352,9 +400,9 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int? progress)? loading,
-    TResult Function(QuranModel quranModel)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loading,
+    TResult Function(Verses data)? loaded,
+    TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -401,7 +449,7 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements QuranState {
+abstract class _Initial implements VersesState {
   const factory _Initial() = _$_Initial;
 }
 
@@ -410,95 +458,68 @@ abstract class _$$_LoadingCopyWith<$Res> {
   factory _$$_LoadingCopyWith(
           _$_Loading value, $Res Function(_$_Loading) then) =
       __$$_LoadingCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int? progress});
 }
 
 /// @nodoc
 class __$$_LoadingCopyWithImpl<$Res>
-    extends _$QuranStateCopyWithImpl<$Res, _$_Loading>
+    extends _$VersesStateCopyWithImpl<$Res, _$_Loading>
     implements _$$_LoadingCopyWith<$Res> {
   __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? progress = freezed,
-  }) {
-    return _then(_$_Loading(
-      progress: freezed == progress
-          ? _value.progress
-          : progress // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_Loading implements _Loading {
-  const _$_Loading({this.progress});
-
-  @override
-  final int? progress;
+  const _$_Loading();
 
   @override
   String toString() {
-    return 'QuranState.loading(progress: $progress)';
+    return 'VersesState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Loading &&
-            (identical(other.progress, progress) ||
-                other.progress == progress));
+        (other.runtimeType == runtimeType && other is _$_Loading);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, progress);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_LoadingCopyWith<_$_Loading> get copyWith =>
-      __$$_LoadingCopyWithImpl<_$_Loading>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int? progress) loading,
-    required TResult Function(QuranModel quranModel) loaded,
-    required TResult Function(String message) error,
+    required TResult Function() loading,
+    required TResult Function(Verses data) loaded,
+    required TResult Function(String msg) error,
   }) {
-    return loading(progress);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int? progress)? loading,
-    TResult? Function(QuranModel quranModel)? loaded,
-    TResult? Function(String message)? error,
+    TResult? Function()? loading,
+    TResult? Function(Verses data)? loaded,
+    TResult? Function(String msg)? error,
   }) {
-    return loading?.call(progress);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int? progress)? loading,
-    TResult Function(QuranModel quranModel)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loading,
+    TResult Function(Verses data)? loaded,
+    TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(progress);
+      return loading();
     }
     return orElse();
   }
@@ -541,13 +562,8 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements QuranState {
-  const factory _Loading({final int? progress}) = _$_Loading;
-
-  int? get progress;
-  @JsonKey(ignore: true)
-  _$$_LoadingCopyWith<_$_Loading> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class _Loading implements VersesState {
+  const factory _Loading() = _$_Loading;
 }
 
 /// @nodoc
@@ -555,14 +571,14 @@ abstract class _$$_LoadedCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({QuranModel quranModel});
+  $Res call({Verses data});
 
-  $QuranModelCopyWith<$Res> get quranModel;
+  $VersesCopyWith<$Res> get data;
 }
 
 /// @nodoc
 class __$$_LoadedCopyWithImpl<$Res>
-    extends _$QuranStateCopyWithImpl<$Res, _$_Loaded>
+    extends _$VersesStateCopyWithImpl<$Res, _$_Loaded>
     implements _$$_LoadedCopyWith<$Res> {
   __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
       : super(_value, _then);
@@ -570,21 +586,21 @@ class __$$_LoadedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? quranModel = null,
+    Object? data = null,
   }) {
     return _then(_$_Loaded(
-      quranModel: null == quranModel
-          ? _value.quranModel
-          : quranModel // ignore: cast_nullable_to_non_nullable
-              as QuranModel,
+      null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Verses,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $QuranModelCopyWith<$Res> get quranModel {
-    return $QuranModelCopyWith<$Res>(_value.quranModel, (value) {
-      return _then(_value.copyWith(quranModel: value));
+  $VersesCopyWith<$Res> get data {
+    return $VersesCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value));
     });
   }
 }
@@ -592,14 +608,14 @@ class __$$_LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded({required this.quranModel});
+  const _$_Loaded(this.data);
 
   @override
-  final QuranModel quranModel;
+  final Verses data;
 
   @override
   String toString() {
-    return 'QuranState.loaded(quranModel: $quranModel)';
+    return 'VersesState.loaded(data: $data)';
   }
 
   @override
@@ -607,12 +623,11 @@ class _$_Loaded implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Loaded &&
-            (identical(other.quranModel, quranModel) ||
-                other.quranModel == quranModel));
+            (identical(other.data, data) || other.data == data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, quranModel);
+  int get hashCode => Object.hash(runtimeType, data);
 
   @JsonKey(ignore: true)
   @override
@@ -624,35 +639,35 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int? progress) loading,
-    required TResult Function(QuranModel quranModel) loaded,
-    required TResult Function(String message) error,
+    required TResult Function() loading,
+    required TResult Function(Verses data) loaded,
+    required TResult Function(String msg) error,
   }) {
-    return loaded(quranModel);
+    return loaded(data);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int? progress)? loading,
-    TResult? Function(QuranModel quranModel)? loaded,
-    TResult? Function(String message)? error,
+    TResult? Function()? loading,
+    TResult? Function(Verses data)? loaded,
+    TResult? Function(String msg)? error,
   }) {
-    return loaded?.call(quranModel);
+    return loaded?.call(data);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int? progress)? loading,
-    TResult Function(QuranModel quranModel)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loading,
+    TResult Function(Verses data)? loaded,
+    TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(quranModel);
+      return loaded(data);
     }
     return orElse();
   }
@@ -695,10 +710,10 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements QuranState {
-  const factory _Loaded({required final QuranModel quranModel}) = _$_Loaded;
+abstract class _Loaded implements VersesState {
+  const factory _Loaded(final Verses data) = _$_Loaded;
 
-  QuranModel get quranModel;
+  Verses get data;
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -709,12 +724,12 @@ abstract class _$$_ErrorCopyWith<$Res> {
   factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
       __$$_ErrorCopyWithImpl<$Res>;
   @useResult
-  $Res call({String message});
+  $Res call({String msg});
 }
 
 /// @nodoc
 class __$$_ErrorCopyWithImpl<$Res>
-    extends _$QuranStateCopyWithImpl<$Res, _$_Error>
+    extends _$VersesStateCopyWithImpl<$Res, _$_Error>
     implements _$$_ErrorCopyWith<$Res> {
   __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
       : super(_value, _then);
@@ -722,12 +737,12 @@ class __$$_ErrorCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
+    Object? msg = null,
   }) {
     return _then(_$_Error(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
+      null == msg
+          ? _value.msg
+          : msg // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -736,14 +751,14 @@ class __$$_ErrorCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Error implements _Error {
-  const _$_Error(this.message);
+  const _$_Error(this.msg);
 
   @override
-  final String message;
+  final String msg;
 
   @override
   String toString() {
-    return 'QuranState.error(message: $message)';
+    return 'VersesState.error(msg: $msg)';
   }
 
   @override
@@ -751,11 +766,11 @@ class _$_Error implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Error &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.msg, msg) || other.msg == msg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, msg);
 
   @JsonKey(ignore: true)
   @override
@@ -767,35 +782,35 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int? progress) loading,
-    required TResult Function(QuranModel quranModel) loaded,
-    required TResult Function(String message) error,
+    required TResult Function() loading,
+    required TResult Function(Verses data) loaded,
+    required TResult Function(String msg) error,
   }) {
-    return error(message);
+    return error(msg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int? progress)? loading,
-    TResult? Function(QuranModel quranModel)? loaded,
-    TResult? Function(String message)? error,
+    TResult? Function()? loading,
+    TResult? Function(Verses data)? loaded,
+    TResult? Function(String msg)? error,
   }) {
-    return error?.call(message);
+    return error?.call(msg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int? progress)? loading,
-    TResult Function(QuranModel quranModel)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loading,
+    TResult Function(Verses data)? loaded,
+    TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(message);
+      return error(msg);
     }
     return orElse();
   }
@@ -838,10 +853,10 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements QuranState {
-  const factory _Error(final String message) = _$_Error;
+abstract class _Error implements VersesState {
+  const factory _Error(final String msg) = _$_Error;
 
-  String get message;
+  String get msg;
   @JsonKey(ignore: true)
   _$$_ErrorCopyWith<_$_Error> get copyWith =>
       throw _privateConstructorUsedError;

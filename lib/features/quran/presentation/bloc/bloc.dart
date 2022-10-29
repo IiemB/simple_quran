@@ -1,1 +1,2 @@
-export 'quran/quran.dart';
+export 'chapters/chapters.dart';
+export 'verses/verses.dart';

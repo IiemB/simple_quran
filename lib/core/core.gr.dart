@@ -24,22 +24,18 @@ class _$_AppRouter extends RootStackRouter {
       );
     },
     QuranRoute.name: (routeData) {
-      final args = routeData.argsAs<QuranRouteArgs>();
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: QuranPage(
-          key: args.key,
-          quranModel: args.quranModel,
-        ),
+        child: const QuranPage(),
       );
     },
-    SurahRoute.name: (routeData) {
-      final args = routeData.argsAs<SurahRouteArgs>();
+    ChapterRoute.name: (routeData) {
+      final args = routeData.argsAs<ChapterRouteArgs>();
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: SurahPage(
+        child: ChapterPage(
           key: args.key,
-          surahModel: args.surahModel,
+          chapter: args.chapter,
         ),
       );
     },
@@ -56,8 +52,8 @@ class _$_AppRouter extends RootStackRouter {
           path: 'quran',
         ),
         RouteConfig(
-          SurahRoute.name,
-          path: 'surah',
+          ChapterRoute.name,
+          path: 'chapter',
         ),
       ];
 }
@@ -76,68 +72,46 @@ class SplashRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [QuranPage]
-class QuranRoute extends PageRouteInfo<QuranRouteArgs> {
-  QuranRoute({
-    Key? key,
-    required QuranModel quranModel,
-  }) : super(
+class QuranRoute extends PageRouteInfo<void> {
+  const QuranRoute()
+      : super(
           QuranRoute.name,
           path: 'quran',
-          args: QuranRouteArgs(
-            key: key,
-            quranModel: quranModel,
-          ),
         );
 
   static const String name = 'QuranRoute';
 }
 
-class QuranRouteArgs {
-  const QuranRouteArgs({
-    this.key,
-    required this.quranModel,
-  });
-
-  final Key? key;
-
-  final QuranModel quranModel;
-
-  @override
-  String toString() {
-    return 'QuranRouteArgs{key: $key, quranModel: $quranModel}';
-  }
-}
-
 /// generated route for
-/// [SurahPage]
-class SurahRoute extends PageRouteInfo<SurahRouteArgs> {
-  SurahRoute({
+/// [ChapterPage]
+class ChapterRoute extends PageRouteInfo<ChapterRouteArgs> {
+  ChapterRoute({
     Key? key,
-    required SurahModel surahModel,
+    required Chapter chapter,
   }) : super(
-          SurahRoute.name,
-          path: 'surah',
-          args: SurahRouteArgs(
+          ChapterRoute.name,
+          path: 'chapter',
+          args: ChapterRouteArgs(
             key: key,
-            surahModel: surahModel,
+            chapter: chapter,
           ),
         );
 
-  static const String name = 'SurahRoute';
+  static const String name = 'ChapterRoute';
 }
 
-class SurahRouteArgs {
-  const SurahRouteArgs({
+class ChapterRouteArgs {
+  const ChapterRouteArgs({
     this.key,
-    required this.surahModel,
+    required this.chapter,
   });
 
   final Key? key;
 
-  final SurahModel surahModel;
+  final Chapter chapter;
 
   @override
   String toString() {
-    return 'SurahRouteArgs{key: $key, surahModel: $surahModel}';
+    return 'ChapterRouteArgs{key: $key, chapter: $chapter}';
   }
 }

@@ -2,13 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simple_quran/core/core.dart';
-import 'package:simple_quran/features/quran/quran.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_quran/features/settings/settings.dart';
 import 'package:simple_quran/utils/utils.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final SettingsModel? settings;
+
+  const MyApp({super.key, this.settings});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +19,11 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, _) => MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => QuranBloc()),
-          BlocProvider(create: (context) => SettingsCubit()..loadSettings()),
+          BlocProvider(create: (context) => SettingsCubit(initial: settings)),
         ],
         child: BlocBuilder<SettingsCubit, SettingsModel>(
+          buildWhen: (previous, current) =>
+              previous.appThemes != current.appThemes,
           builder: (context, state) {
             return MaterialApp.router(
               theme: state.appThemes.themeData.modified,

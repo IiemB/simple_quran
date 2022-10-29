@@ -1,92 +1,50 @@
-import 'dart:convert';
-import 'dart:io';
-import 'dart:math';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:simple_quran/common/common.dart';
 import 'package:simple_quran/core/core.dart';
 import 'package:simple_quran/features/quran/quran.dart';
-import 'package:simple_quran/utils/utils.dart';
 
 @LazySingleton(as: QuranRemoteDatasources)
 class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
-  static const _quranEdition = 'quran-uthmani';
-
   @override
-  Future<QuranModel> getQuran({
-    void Function(int progress)? onReceiveProgress,
+  Future<Chapters> getChapters({
+    required String language,
+    required bool force,
   }) async {
     try {
-      final savedQuranSize = sharedPrefs.getInt(QURAN_SIZE) ?? 4671961;
+      final jsonKey = 'chapters_$language';
 
-      var newQuranSize = 0;
+      const path = '/chapters';
 
-      const editionPath = '/$_quranEdition';
+      final param = {'language': language};
 
-      Future<Response<dynamic>> getData() => dio.get(
-            editionPath,
-            onReceiveProgress: (recv, _) {
-              final progress = ((recv / savedQuranSize) * 100).toInt();
+      Future<Chapters> getData() async {
+        final resp = await dio.get(
+          path,
+          queryParameters: param,
+        );
 
-              newQuranSize = recv;
+        final data = Chapters.fromJson(resp.data);
 
-              onReceiveProgress?.call(progress);
-            },
-          );
+        return data;
+      }
 
       if (kIsWeb) {
-        final resp = await getData();
-
-        final data = QuranResponeDataModel.fromJson(resp.data).data;
-
-        if (data == null) {
-          throw Exception('Failed to load Quran');
-        }
-
-        await sharedPrefs.setInt(QURAN_SIZE, newQuranSize);
+        final data = await getData();
 
         return data;
       }
 
-      final cacheDirectory = await getTemporaryDirectory();
+      final cachedJsonData = await JsonCacheManager.getJson(jsonKey);
 
-      final editionJsonCachePath = '${cacheDirectory.path}/$_quranEdition.json';
-
-      final editionJsonCacheFile = File(editionJsonCachePath);
-
-      if (await editionJsonCacheFile.exists()) {
-        final quranJsonString = await editionJsonCacheFile.readAsString();
-
-        final quranJson = jsonDecode(quranJsonString) as Map<String, dynamic>;
-
-        final data = QuranModel.fromJson(quranJson);
-
-        final random = Random();
-
-        for (var i = 1; i < 101; i++) {
-          await Future.delayed(
-            Duration(milliseconds: random.nextInt(40) + 10),
-            () => onReceiveProgress?.call(i),
-          );
-        }
-
-        return data;
+      if (cachedJsonData != null && !force) {
+        return Chapters.fromJson(cachedJsonData);
       }
 
-      final resp = await getData();
+      final data = await getData();
 
-      final data = QuranResponeDataModel.fromJson(resp.data).data;
-
-      if (data == null) {
-        throw Exception('Failed to load Quran');
-      }
-
-      await sharedPrefs.setInt(QURAN_SIZE, newQuranSize);
-
-      await JsonCacheManager.saveJson(_quranEdition, data.toJson());
+      await JsonCacheManager.saveJson(jsonKey, data.toJson());
 
       return data;
     } on DioError catch (e) {
@@ -94,5 +52,47 @@ class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future<Verses> getVerses({
+    required int chapterNumber,
+    required QuranEdition edition,
+    required bool force,
+  }) async {
+    final jsonKey = 'verses_${chapterNumber}_${edition.name}';
+
+    final path = '/quran/verses/${edition.name}';
+
+    final param = {'chapter_number': chapterNumber};
+
+    Future<Verses> getData() async {
+      final resp = await dio.get(
+        path,
+        queryParameters: param,
+      );
+
+      final data = Verses.fromJson(resp.data);
+
+      return data;
+    }
+
+    if (kIsWeb) {
+      final data = await getData();
+
+      return data;
+    }
+
+    final cachedJsonData = await JsonCacheManager.getJson(jsonKey);
+
+    if (cachedJsonData != null && !force) {
+      return Verses.fromJson(cachedJsonData);
+    }
+
+    final data = await getData();
+
+    await JsonCacheManager.saveJson(jsonKey, data.toJson());
+
+    return data;
   }
 }

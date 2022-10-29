@@ -22,6 +22,7 @@ SettingsModel _$SettingsModelFromJson(Map<String, dynamic> json) {
 mixin _$SettingsModel {
   AppThemes get appThemes => throw _privateConstructorUsedError;
   double get textSize => throw _privateConstructorUsedError;
+  QuranEdition get quranEdition => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $SettingsModelCopyWith<$Res> {
           SettingsModel value, $Res Function(SettingsModel) then) =
       _$SettingsModelCopyWithImpl<$Res, SettingsModel>;
   @useResult
-  $Res call({AppThemes appThemes, double textSize});
+  $Res call({AppThemes appThemes, double textSize, QuranEdition quranEdition});
 }
 
 /// @nodoc
@@ -53,6 +54,7 @@ class _$SettingsModelCopyWithImpl<$Res, $Val extends SettingsModel>
   $Res call({
     Object? appThemes = null,
     Object? textSize = null,
+    Object? quranEdition = null,
   }) {
     return _then(_value.copyWith(
       appThemes: null == appThemes
@@ -63,6 +65,10 @@ class _$SettingsModelCopyWithImpl<$Res, $Val extends SettingsModel>
           ? _value.textSize
           : textSize // ignore: cast_nullable_to_non_nullable
               as double,
+      quranEdition: null == quranEdition
+          ? _value.quranEdition
+          : quranEdition // ignore: cast_nullable_to_non_nullable
+              as QuranEdition,
     ) as $Val);
   }
 }
@@ -75,7 +81,7 @@ abstract class _$$_SettingsModelCopyWith<$Res>
       __$$_SettingsModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AppThemes appThemes, double textSize});
+  $Res call({AppThemes appThemes, double textSize, QuranEdition quranEdition});
 }
 
 /// @nodoc
@@ -91,6 +97,7 @@ class __$$_SettingsModelCopyWithImpl<$Res>
   $Res call({
     Object? appThemes = null,
     Object? textSize = null,
+    Object? quranEdition = null,
   }) {
     return _then(_$_SettingsModel(
       appThemes: null == appThemes
@@ -101,6 +108,10 @@ class __$$_SettingsModelCopyWithImpl<$Res>
           ? _value.textSize
           : textSize // ignore: cast_nullable_to_non_nullable
               as double,
+      quranEdition: null == quranEdition
+          ? _value.quranEdition
+          : quranEdition // ignore: cast_nullable_to_non_nullable
+              as QuranEdition,
     ));
   }
 }
@@ -108,7 +119,10 @@ class __$$_SettingsModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_SettingsModel implements _SettingsModel {
-  _$_SettingsModel({this.appThemes = AppThemes.light, this.textSize = 24});
+  _$_SettingsModel(
+      {this.appThemes = AppThemes.light,
+      this.textSize = 24,
+      this.quranEdition = QuranEdition.uthmani});
 
   factory _$_SettingsModel.fromJson(Map<String, dynamic> json) =>
       _$$_SettingsModelFromJson(json);
@@ -119,10 +133,13 @@ class _$_SettingsModel implements _SettingsModel {
   @override
   @JsonKey()
   final double textSize;
+  @override
+  @JsonKey()
+  final QuranEdition quranEdition;
 
   @override
   String toString() {
-    return 'SettingsModel(appThemes: $appThemes, textSize: $textSize)';
+    return 'SettingsModel(appThemes: $appThemes, textSize: $textSize, quranEdition: $quranEdition)';
   }
 
   @override
@@ -133,12 +150,15 @@ class _$_SettingsModel implements _SettingsModel {
             (identical(other.appThemes, appThemes) ||
                 other.appThemes == appThemes) &&
             (identical(other.textSize, textSize) ||
-                other.textSize == textSize));
+                other.textSize == textSize) &&
+            (identical(other.quranEdition, quranEdition) ||
+                other.quranEdition == quranEdition));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, appThemes, textSize);
+  int get hashCode =>
+      Object.hash(runtimeType, appThemes, textSize, quranEdition);
 
   @JsonKey(ignore: true)
   @override
@@ -155,8 +175,10 @@ class _$_SettingsModel implements _SettingsModel {
 }
 
 abstract class _SettingsModel implements SettingsModel {
-  factory _SettingsModel({final AppThemes appThemes, final double textSize}) =
-      _$_SettingsModel;
+  factory _SettingsModel(
+      {final AppThemes appThemes,
+      final double textSize,
+      final QuranEdition quranEdition}) = _$_SettingsModel;
 
   factory _SettingsModel.fromJson(Map<String, dynamic> json) =
       _$_SettingsModel.fromJson;
@@ -165,6 +187,8 @@ abstract class _SettingsModel implements SettingsModel {
   AppThemes get appThemes;
   @override
   double get textSize;
+  @override
+  QuranEdition get quranEdition;
   @override
   @JsonKey(ignore: true)
   _$$_SettingsModelCopyWith<_$_SettingsModel> get copyWith =>

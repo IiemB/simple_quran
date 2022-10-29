@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:i_packages/i_packages.dart';
 import 'package:simple_quran/features/quran/quran.dart';
 import 'package:simple_quran/features/settings/settings.dart';
 import 'package:simple_quran/utils/utils.dart';
@@ -7,9 +9,7 @@ import 'package:simple_quran/utils/utils.dart';
 class QuranPage extends StatefulWidget {
   static const routeName = 'quran';
 
-  final QuranModel quranModel;
-
-  const QuranPage({super.key, required this.quranModel});
+  const QuranPage({super.key});
 
   @override
   State<QuranPage> createState() => _QuranPageState();
@@ -26,34 +26,97 @@ class _QuranPageState extends State<QuranPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Scrollbar(
-        radius: const Radius.circular(4),
-        controller: _scrollController,
-        child: CustomScrollView(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              ChaptersBloc()..add(const ChaptersEvent.getChapters()),
+        ),
+      ],
+      child: Scaffold(
+        body: Scrollbar(
+          radius: const Radius.circular(4),
           controller: _scrollController,
-          slivers: [
-            SliverAppBar(
-              floating: true,
-              centerTitle: false,
-              title: Text(
-                'القرآن الكريم',
-                textDirection: TextDirection.rtl,
-                style: TextStyle(
-                  fontFamily: FontFamily.isepMisbah,
-                  fontSize: 26.sp,
+          child: CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              SliverAppBar(
+                floating: true,
+                centerTitle: false,
+                title: Text(
+                  'القرآن الكريم',
+                  textDirection: TextDirection.rtl,
+                  style: TextStyle(
+                    fontFamily: FontFamily.isepMisbah,
+                    fontSize: 26.sp,
+                  ),
+                ),
+                actions: const [SettingsButton()],
+              ),
+              BlocBuilder<ChaptersBloc, ChaptersState>(
+                builder: (context, state) => state.maybeMap(
+                  orElse: () => const SliverFillRemaining(
+                    child: Center(child: CircularProgressIndicator()),
+                  ),
+                  loading: (value) => const SliverFillRemaining(
+                    child: Center(child: CircularProgressIndicator()),
+                  ),
+                  loaded: (value) {
+                    final chapters = value.data.chapters;
+
+                    if (chapters == null) {
+                      return SliverFillRemaining(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text('Failed to load data - null'),
+                              const IGap(),
+                              OutlinedButton(
+                                onPressed: () =>
+                                    BlocProvider.of<ChaptersBloc>(context).add(
+                                  const ChaptersEvent.getChapters(force: true),
+                                ),
+                                child: const Text('Retry'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+
+                    return SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) => ChapterCard(
+                          chapter: chapters[index],
+                          chapterNumber: index + 1,
+                        ),
+                        childCount: chapters.length,
+                      ),
+                    );
+                  },
+                  error: (value) => SliverFillRemaining(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('Failed to load data - error'),
+                          const IGap(),
+                          OutlinedButton(
+                            onPressed: () =>
+                                BlocProvider.of<ChaptersBloc>(context).add(
+                              const ChaptersEvent.getChapters(force: true),
+                            ),
+                            child: const Text('Retry'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              actions: const [SettingsButton()],
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) =>
-                    SurahCard(surahModel: widget.quranModel.surahs[index]),
-                childCount: widget.quranModel.surahs.length,
-              ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
     );
