@@ -8,7 +8,6 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../common/shared_prefs.dart' as _i13;
 import '../features/about/about.dart' as _i3;
 import '../features/about/data/datasources/about_local_datasources_impl.dart'
     as _i4;
@@ -50,6 +49,5 @@ _i1.GetIt $initGetIt(
       () => _i11.SettingsLocalDatasourcesImpl());
   gh.lazySingleton<_i10.SettingsRepositories>(() =>
       _i12.SettingsRepositoriesImpl(get<_i10.SettingsLocalDatasources>()));
-  gh.lazySingleton<_i13.SharedPrefs>(() => _i13.SharedPrefs());
   return get;
 }

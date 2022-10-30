@@ -15,6 +15,7 @@ class LicensesPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           const SliverAppBar(
+            floating: true,
             leading: CustomBackButton(),
             title: Text('License'),
           ),

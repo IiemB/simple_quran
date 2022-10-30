@@ -19,6 +19,7 @@ class AboutPage extends StatelessWidget {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
+              floating: true,
               title: const Text('About'),
               leading: IconButton(
                 onPressed: () => context.router.pop(),

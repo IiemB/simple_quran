@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:simple_quran/common/common.dart';
 import 'package:simple_quran/core/core.dart';
 import 'package:simple_quran/features/settings/settings.dart';
 import 'package:simple_quran/my_app.dart';
@@ -18,8 +17,6 @@ void main() async {
   configureDependencies();
 
   await dotenv.load();
-
-  await getIt<SharedPrefs>().init();
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     setWindowMaxSize(const Size(1024, 768));
