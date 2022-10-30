@@ -8,14 +8,33 @@ final _repositories = getIt<QuranRepositories>();
 class QuranUsecases {
   const QuranUsecases._();
 
-  static const getQuran = $GetQuran();
+  static const getChapters = $GetChapters();
+  static const getVerses = $GetVerses();
 }
 
-class $GetQuran {
-  const $GetQuran();
-
-  Future<Either<Failure, QuranModel>> call({
-    void Function(int progress)? onReceiveProgress,
+class $GetVerses {
+  const $GetVerses();
+  Future<Either<Failure, Verses>> call({
+    required int chapterNumber,
+    required QuranEdition edition,
+    required bool force,
   }) =>
-      _repositories.getQuran(onReceiveProgress: onReceiveProgress);
+      _repositories.getVerses(
+        chapterNumber: chapterNumber,
+        edition: edition,
+        force: force,
+      );
+}
+
+class $GetChapters {
+  const $GetChapters();
+
+  Future<Either<Failure, Chapters>> call({
+    required String language,
+    required bool force,
+  }) =>
+      _repositories.getChapters(
+        language: language,
+        force: force,
+      );
 }

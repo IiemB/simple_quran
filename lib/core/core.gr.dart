@@ -24,22 +24,41 @@ class _$_AppRouter extends RootStackRouter {
       );
     },
     QuranRoute.name: (routeData) {
-      final args = routeData.argsAs<QuranRouteArgs>();
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: QuranPage(
+        child: const QuranPage(),
+      );
+    },
+    ChapterRoute.name: (routeData) {
+      final args = routeData.argsAs<ChapterRouteArgs>();
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: ChapterPage(
           key: args.key,
-          quranModel: args.quranModel,
+          chapter: args.chapter,
         ),
       );
     },
-    SurahRoute.name: (routeData) {
-      final args = routeData.argsAs<SurahRouteArgs>();
+    AboutRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
-        child: SurahPage(
+        child: const AboutPage(),
+      );
+    },
+    LicensesRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const LicensesPage(),
+      );
+    },
+    LicensesDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<LicensesDetailRouteArgs>();
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: LicensesDetailPage(
           key: args.key,
-          surahModel: args.surahModel,
+          packageName: args.packageName,
+          licenseEntries: args.licenseEntries,
         ),
       );
     },
@@ -56,8 +75,20 @@ class _$_AppRouter extends RootStackRouter {
           path: 'quran',
         ),
         RouteConfig(
-          SurahRoute.name,
-          path: 'surah',
+          ChapterRoute.name,
+          path: 'chapter',
+        ),
+        RouteConfig(
+          AboutRoute.name,
+          path: 'about',
+        ),
+        RouteConfig(
+          LicensesRoute.name,
+          path: 'lisenses',
+        ),
+        RouteConfig(
+          LicensesDetailRoute.name,
+          path: 'lisenses-detail',
         ),
       ];
 }
@@ -76,68 +107,109 @@ class SplashRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [QuranPage]
-class QuranRoute extends PageRouteInfo<QuranRouteArgs> {
-  QuranRoute({
-    Key? key,
-    required QuranModel quranModel,
-  }) : super(
+class QuranRoute extends PageRouteInfo<void> {
+  const QuranRoute()
+      : super(
           QuranRoute.name,
           path: 'quran',
-          args: QuranRouteArgs(
-            key: key,
-            quranModel: quranModel,
-          ),
         );
 
   static const String name = 'QuranRoute';
 }
 
-class QuranRouteArgs {
-  const QuranRouteArgs({
+/// generated route for
+/// [ChapterPage]
+class ChapterRoute extends PageRouteInfo<ChapterRouteArgs> {
+  ChapterRoute({
+    Key? key,
+    required Chapter chapter,
+  }) : super(
+          ChapterRoute.name,
+          path: 'chapter',
+          args: ChapterRouteArgs(
+            key: key,
+            chapter: chapter,
+          ),
+        );
+
+  static const String name = 'ChapterRoute';
+}
+
+class ChapterRouteArgs {
+  const ChapterRouteArgs({
     this.key,
-    required this.quranModel,
+    required this.chapter,
   });
 
   final Key? key;
 
-  final QuranModel quranModel;
+  final Chapter chapter;
 
   @override
   String toString() {
-    return 'QuranRouteArgs{key: $key, quranModel: $quranModel}';
+    return 'ChapterRouteArgs{key: $key, chapter: $chapter}';
   }
 }
 
 /// generated route for
-/// [SurahPage]
-class SurahRoute extends PageRouteInfo<SurahRouteArgs> {
-  SurahRoute({
+/// [AboutPage]
+class AboutRoute extends PageRouteInfo<void> {
+  const AboutRoute()
+      : super(
+          AboutRoute.name,
+          path: 'about',
+        );
+
+  static const String name = 'AboutRoute';
+}
+
+/// generated route for
+/// [LicensesPage]
+class LicensesRoute extends PageRouteInfo<void> {
+  const LicensesRoute()
+      : super(
+          LicensesRoute.name,
+          path: 'lisenses',
+        );
+
+  static const String name = 'LicensesRoute';
+}
+
+/// generated route for
+/// [LicensesDetailPage]
+class LicensesDetailRoute extends PageRouteInfo<LicensesDetailRouteArgs> {
+  LicensesDetailRoute({
     Key? key,
-    required SurahModel surahModel,
+    required String packageName,
+    required List<LicenseEntry> licenseEntries,
   }) : super(
-          SurahRoute.name,
-          path: 'surah',
-          args: SurahRouteArgs(
+          LicensesDetailRoute.name,
+          path: 'lisenses-detail',
+          args: LicensesDetailRouteArgs(
             key: key,
-            surahModel: surahModel,
+            packageName: packageName,
+            licenseEntries: licenseEntries,
           ),
         );
 
-  static const String name = 'SurahRoute';
+  static const String name = 'LicensesDetailRoute';
 }
 
-class SurahRouteArgs {
-  const SurahRouteArgs({
+class LicensesDetailRouteArgs {
+  const LicensesDetailRouteArgs({
     this.key,
-    required this.surahModel,
+    required this.packageName,
+    required this.licenseEntries,
   });
 
   final Key? key;
 
-  final SurahModel surahModel;
+  final String packageName;
+
+  final List<LicenseEntry> licenseEntries;
 
   @override
   String toString() {
-    return 'SurahRouteArgs{key: $key, surahModel: $surahModel}';
+    return 'LicensesDetailRouteArgs{key: $key, packageName: $packageName, licenseEntries: $licenseEntries}';
   }
 }
