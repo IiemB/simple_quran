@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:i_packages/i_packages.dart';
+import 'package:simple_quran/features/about/presentation/pages/about_page.dart';
 import 'package:simple_quran/features/quran/quran.dart';
 import 'package:simple_quran/features/settings/settings.dart';
 import 'package:simple_quran/utils/utils.dart';
@@ -34,6 +35,7 @@ class _QuranPageState extends State<QuranPage> {
         ),
       ],
       child: Scaffold(
+        drawer: const AboutPage(),
         body: Scrollbar(
           radius: const Radius.circular(4),
           controller: _scrollController,
@@ -41,15 +43,23 @@ class _QuranPageState extends State<QuranPage> {
             controller: _scrollController,
             slivers: [
               SliverAppBar(
+                automaticallyImplyLeading: false,
                 floating: true,
                 centerTitle: false,
-                title: Text(
-                  'القرآن الكريم',
-                  textDirection: TextDirection.rtl,
-                  style: TextStyle(
-                    fontFamily: FontFamily.isepMisbah,
-                    fontSize: 26.sp,
-                  ),
+                title: Builder(
+                  builder: (context) {
+                    return GestureDetector(
+                      onTap: () => Scaffold.of(context).openDrawer(),
+                      child: Text(
+                        'القرآن الكريم',
+                        textDirection: TextDirection.rtl,
+                        style: TextStyle(
+                          fontFamily: FontFamily.isepMisbah,
+                          fontSize: 26.sp,
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 actions: const [SettingsButton()],
               ),

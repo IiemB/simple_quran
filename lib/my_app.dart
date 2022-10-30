@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simple_quran/core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simple_quran/features/about/about.dart';
 import 'package:simple_quran/features/settings/settings.dart';
 import 'package:simple_quran/utils/utils.dart';
 
@@ -20,6 +21,14 @@ class MyApp extends StatelessWidget {
       builder: (context, _) => MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => SettingsCubit(initial: settings)),
+          BlocProvider(
+            create: (context) => AboutCubit()..getAppInfo(),
+            lazy: false,
+          ),
+          BlocProvider(
+            create: (context) => LicenseCubit()..getLicense(),
+            lazy: false,
+          ),
         ],
         child: BlocBuilder<SettingsCubit, SettingsModel>(
           buildWhen: (previous, current) =>

@@ -39,6 +39,29 @@ class _$_AppRouter extends RootStackRouter {
         ),
       );
     },
+    AboutRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const AboutPage(),
+      );
+    },
+    LicensesRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const LicensesPage(),
+      );
+    },
+    LicensesDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<LicensesDetailRouteArgs>();
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: LicensesDetailPage(
+          key: args.key,
+          packageName: args.packageName,
+          licenseEntries: args.licenseEntries,
+        ),
+      );
+    },
   };
 
   @override
@@ -54,6 +77,18 @@ class _$_AppRouter extends RootStackRouter {
         RouteConfig(
           ChapterRoute.name,
           path: 'chapter',
+        ),
+        RouteConfig(
+          AboutRoute.name,
+          path: 'about',
+        ),
+        RouteConfig(
+          LicensesRoute.name,
+          path: 'lisenses',
+        ),
+        RouteConfig(
+          LicensesDetailRoute.name,
+          path: 'lisenses-detail',
         ),
       ];
 }
@@ -113,5 +148,68 @@ class ChapterRouteArgs {
   @override
   String toString() {
     return 'ChapterRouteArgs{key: $key, chapter: $chapter}';
+  }
+}
+
+/// generated route for
+/// [AboutPage]
+class AboutRoute extends PageRouteInfo<void> {
+  const AboutRoute()
+      : super(
+          AboutRoute.name,
+          path: 'about',
+        );
+
+  static const String name = 'AboutRoute';
+}
+
+/// generated route for
+/// [LicensesPage]
+class LicensesRoute extends PageRouteInfo<void> {
+  const LicensesRoute()
+      : super(
+          LicensesRoute.name,
+          path: 'lisenses',
+        );
+
+  static const String name = 'LicensesRoute';
+}
+
+/// generated route for
+/// [LicensesDetailPage]
+class LicensesDetailRoute extends PageRouteInfo<LicensesDetailRouteArgs> {
+  LicensesDetailRoute({
+    Key? key,
+    required String packageName,
+    required List<LicenseEntry> licenseEntries,
+  }) : super(
+          LicensesDetailRoute.name,
+          path: 'lisenses-detail',
+          args: LicensesDetailRouteArgs(
+            key: key,
+            packageName: packageName,
+            licenseEntries: licenseEntries,
+          ),
+        );
+
+  static const String name = 'LicensesDetailRoute';
+}
+
+class LicensesDetailRouteArgs {
+  const LicensesDetailRouteArgs({
+    this.key,
+    required this.packageName,
+    required this.licenseEntries,
+  });
+
+  final Key? key;
+
+  final String packageName;
+
+  final List<LicenseEntry> licenseEntries;
+
+  @override
+  String toString() {
+    return 'LicensesDetailRouteArgs{key: $key, packageName: $packageName, licenseEntries: $licenseEntries}';
   }
 }
