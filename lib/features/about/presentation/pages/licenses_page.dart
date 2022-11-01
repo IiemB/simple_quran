@@ -6,7 +6,7 @@ import 'package:simple_quran/features/about/about.dart';
 import 'package:simple_quran/widgets/widgets.dart';
 
 class LicensesPage extends StatelessWidget {
-  static const routeName = 'lisenses';
+  static const routeName = 'licenses';
   const LicensesPage({super.key});
 
   @override

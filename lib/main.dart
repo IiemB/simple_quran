@@ -1,12 +1,13 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:simple_quran/core/core.dart';
 import 'package:simple_quran/features/settings/settings.dart';
 import 'package:simple_quran/my_app.dart';
-import 'package:i_packages/i_packages.dart';
+import 'package:simple_quran/utils/utils.dart';
 import 'package:window_size/window_size.dart';
 
 void main() async {
@@ -18,9 +19,11 @@ void main() async {
 
   await dotenv.load();
 
-  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    setWindowMaxSize(const Size(1024, 768));
-    setWindowMinSize(const Size(512, 384));
+  if (!kIsWeb) {
+    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+      setWindowMaxSize(const Size(1024, 768));
+      setWindowMinSize(const Size(512, 384));
+    }
   }
 
   final savedSettings = await SettingsUsecases.loadSettings()

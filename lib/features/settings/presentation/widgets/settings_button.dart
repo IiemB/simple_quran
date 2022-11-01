@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:i_packages/i_packages.dart';
 import 'package:simple_quran/features/settings/settings.dart';
+import 'package:simple_quran/utils/utils.dart';
 
 class SettingsButton extends StatelessWidget {
   const SettingsButton({super.key});

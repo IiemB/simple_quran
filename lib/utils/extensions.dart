@@ -23,6 +23,58 @@ extension NumberConverter on num {
     }
     return sb.toString();
   }
+
+  Future<void> get seconds =>
+      Future.delayed(Duration(milliseconds: 300 * toInt()));
+}
+
+extension BuildContextExtension on BuildContext {
+  double get width => MediaQuery.of(this).size.width;
+
+  double get height => MediaQuery.of(this).size.height;
+
+  ThemeData get theme => Theme.of(this);
+
+  Future<T?> showBottomSheet<T>({
+    required Widget Function(BuildContext) builder,
+    Color? backgroundColor,
+    double? elevation,
+    ShapeBorder? shape,
+    Clip? clipBehavior,
+    BoxConstraints? constraints,
+    Color? barrierColor,
+
+    /// Configured to true
+    bool isScrollControlled = true,
+
+    /// Configured to true
+    bool useRootNavigator = true,
+    bool isDismissible = true,
+    bool enableDrag = true,
+    RouteSettings? routeSettings,
+    AnimationController? transitionAnimationController,
+    Offset? anchorPoint,
+  }) async {
+    final result = await showModalBottomSheet<T>(
+      context: this,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      shape: shape,
+      clipBehavior: clipBehavior,
+      constraints: constraints,
+      barrierColor: backgroundColor,
+      isScrollControlled: isScrollControlled,
+      useRootNavigator: useRootNavigator,
+      isDismissible: isDismissible,
+      enableDrag: enableDrag,
+      routeSettings: routeSettings,
+      transitionAnimationController: transitionAnimationController,
+      anchorPoint: anchorPoint,
+      builder: builder,
+    );
+
+    return result;
+  }
 }
 
 extension CroasterThemeData on ThemeData {

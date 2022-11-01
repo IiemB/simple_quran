@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:i_packages/utils/extensions.dart';
+import 'package:simple_quran/utils/utils.dart';
 
 class ParagraphCard extends StatelessWidget {
   final LicenseEntry licenseEntry;

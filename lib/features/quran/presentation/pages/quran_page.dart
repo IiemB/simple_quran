@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:i_packages/i_packages.dart';
 import 'package:simple_quran/features/about/presentation/pages/about_page.dart';
 import 'package:simple_quran/features/quran/quran.dart';
 import 'package:simple_quran/features/settings/settings.dart';
 import 'package:simple_quran/utils/utils.dart';
+import 'package:simple_quran/widgets/widgets.dart';
 
 class QuranPage extends StatefulWidget {
   static const routeName = 'quran';
@@ -35,7 +35,7 @@ class _QuranPageState extends State<QuranPage> {
         ),
       ],
       child: Scaffold(
-        drawer: const AboutPage(),
+        drawer: const AboutDrawer(),
         body: Scrollbar(
           radius: const Radius.circular(4),
           controller: _scrollController,
@@ -81,7 +81,7 @@ class _QuranPageState extends State<QuranPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Text('Failed to load data - null'),
-                              const IGap(),
+                              const Gap(),
                               OutlinedButton(
                                 onPressed: () =>
                                     BlocProvider.of<ChaptersBloc>(context).add(
@@ -111,7 +111,7 @@ class _QuranPageState extends State<QuranPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text('Failed to load data - error'),
-                          const IGap(),
+                          const Gap(),
                           OutlinedButton(
                             onPressed: () =>
                                 BlocProvider.of<ChaptersBloc>(context).add(

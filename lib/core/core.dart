@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_route/empty_router_widgets.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ part 'core.gr.dart';
 
 final getIt = GetIt.instance;
 final appRoutes = getIt<AppRoutes>();
+
 final dio = Dio(
   BaseOptions(
     baseUrl: QURAN_API_BASE_URL,
@@ -40,22 +42,36 @@ void configureDependencies() => $initGetIt(getIt);
     AutoRoute(
       page: QuranPage,
       path: QuranPage.routeName,
+      children: [
+        AutoRoute(
+          name: 'AboutDrawerRoute',
+          page: EmptyRouterPage,
+          path: 'aboutDrawerRoute',
+          children: [
+            RedirectRoute(
+              path: '',
+              redirectTo: AboutPage.routeName,
+            ),
+            AutoRoute(
+              initial: true,
+              page: AboutPage,
+              path: AboutPage.routeName,
+            ),
+            AutoRoute(
+              page: LicensesPage,
+              path: LicensesPage.routeName,
+            ),
+            AutoRoute(
+              page: LicensesDetailPage,
+              path: LicensesDetailPage.routeName,
+            ),
+          ],
+        ),
+      ],
     ),
     AutoRoute(
       page: ChapterPage,
       path: ChapterPage.routeName,
-    ),
-    AutoRoute(
-      page: AboutPage,
-      path: AboutPage.routeName,
-    ),
-    AutoRoute(
-      page: LicensesPage,
-      path: LicensesPage.routeName,
-    ),
-    AutoRoute(
-      page: LicensesDetailPage,
-      path: LicensesDetailPage.routeName,
     ),
   ],
 )

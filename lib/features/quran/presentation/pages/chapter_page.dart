@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:i_packages/i_packages.dart';
 import 'package:simple_quran/features/quran/quran.dart';
 import 'package:simple_quran/features/settings/settings.dart';
 import 'package:simple_quran/utils/utils.dart';
@@ -88,7 +87,7 @@ class _ChapterPageState extends State<ChapterPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   const Text('Failed to load data - null'),
-                                  const IGap(),
+                                  const Gap(),
                                   OutlinedButton(
                                     onPressed: () =>
                                         BlocProvider.of<VersesBloc>(context)
@@ -158,7 +157,7 @@ class _ChapterPageState extends State<ChapterPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Text('Failed to load data - error'),
-                            const IGap(),
+                            const Gap(),
                             OutlinedButton(
                               onPressed: () =>
                                   BlocProvider.of<VersesBloc>(context).add(

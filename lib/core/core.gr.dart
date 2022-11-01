@@ -39,6 +39,12 @@ class _$_AppRouter extends RootStackRouter {
         ),
       );
     },
+    AboutDrawerRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const EmptyRouterPage(),
+      );
+    },
     AboutRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
         routeData: routeData,
@@ -73,22 +79,41 @@ class _$_AppRouter extends RootStackRouter {
         RouteConfig(
           QuranRoute.name,
           path: 'quran',
+          children: [
+            RouteConfig(
+              AboutDrawerRoute.name,
+              path: 'aboutDrawerRoute',
+              parent: QuranRoute.name,
+              children: [
+                RouteConfig(
+                  '#redirect',
+                  path: '',
+                  parent: AboutDrawerRoute.name,
+                  redirectTo: 'about',
+                  fullMatch: true,
+                ),
+                RouteConfig(
+                  AboutRoute.name,
+                  path: 'about',
+                  parent: AboutDrawerRoute.name,
+                ),
+                RouteConfig(
+                  LicensesRoute.name,
+                  path: 'licenses',
+                  parent: AboutDrawerRoute.name,
+                ),
+                RouteConfig(
+                  LicensesDetailRoute.name,
+                  path: 'lisenses-detail',
+                  parent: AboutDrawerRoute.name,
+                ),
+              ],
+            )
+          ],
         ),
         RouteConfig(
           ChapterRoute.name,
           path: 'chapter',
-        ),
-        RouteConfig(
-          AboutRoute.name,
-          path: 'about',
-        ),
-        RouteConfig(
-          LicensesRoute.name,
-          path: 'lisenses',
-        ),
-        RouteConfig(
-          LicensesDetailRoute.name,
-          path: 'lisenses-detail',
         ),
       ];
 }
@@ -108,10 +133,11 @@ class SplashRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [QuranPage]
 class QuranRoute extends PageRouteInfo<void> {
-  const QuranRoute()
+  const QuranRoute({List<PageRouteInfo>? children})
       : super(
           QuranRoute.name,
           path: 'quran',
+          initialChildren: children,
         );
 
   static const String name = 'QuranRoute';
@@ -152,6 +178,19 @@ class ChapterRouteArgs {
 }
 
 /// generated route for
+/// [EmptyRouterPage]
+class AboutDrawerRoute extends PageRouteInfo<void> {
+  const AboutDrawerRoute({List<PageRouteInfo>? children})
+      : super(
+          AboutDrawerRoute.name,
+          path: 'aboutDrawerRoute',
+          initialChildren: children,
+        );
+
+  static const String name = 'AboutDrawerRoute';
+}
+
+/// generated route for
 /// [AboutPage]
 class AboutRoute extends PageRouteInfo<void> {
   const AboutRoute()
@@ -169,7 +208,7 @@ class LicensesRoute extends PageRouteInfo<void> {
   const LicensesRoute()
       : super(
           LicensesRoute.name,
-          path: 'lisenses',
+          path: 'licenses',
         );
 
   static const String name = 'LicensesRoute';
