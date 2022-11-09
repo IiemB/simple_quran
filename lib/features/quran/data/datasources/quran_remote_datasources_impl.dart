@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
@@ -45,6 +47,7 @@ class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
       final data = await getData();
 
       await JsonCacheManager.saveJson(jsonKey, data.toJson());
+      cacheChapters(data);
 
       return data;
     } on DioError catch (e) {
@@ -52,6 +55,47 @@ class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future<Chapter> getChapter({
+    required int chapterNumber,
+    required String language,
+  }) async {
+    final jsonKey = 'chapter_$chapterNumber';
+
+    final path = '/chapters/$chapterNumber';
+
+    final param = {'language': language};
+
+    Future<Chapter> getData() async {
+      final resp = await dio.get(
+        path,
+        queryParameters: param,
+      );
+
+      final data = Chapter.fromJson(resp.data['chapter']);
+
+      return data;
+    }
+
+    if (kIsWeb) {
+      final data = await getData();
+
+      return data;
+    }
+
+    final cachedJsonData = await JsonCacheManager.getJson(jsonKey);
+
+    if (cachedJsonData != null) {
+      return Chapter.fromJson(cachedJsonData);
+    }
+
+    final data = await getData();
+
+    await JsonCacheManager.saveJson(jsonKey, data.toJson());
+
+    return data;
   }
 
   @override
@@ -94,5 +138,30 @@ class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
     await JsonCacheManager.saveJson(jsonKey, data.toJson());
 
     return data;
+  }
+
+  Future<void> cacheChapters(Chapters data) async {
+    final chapters = data.chapters;
+
+    if (chapters == null) {
+      return;
+    }
+
+    for (var chapter in chapters) {
+      final id = chapter.id;
+
+      if (id == null) {
+        log('chapter id is null');
+        break;
+      }
+
+      final jsonKey = 'chapter_$id';
+
+      await JsonCacheManager.saveJson(jsonKey, chapter.toJson());
+
+      log('$jsonKey cached');
+    }
+
+    log('all chapters saved');
   }
 }

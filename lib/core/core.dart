@@ -69,9 +69,13 @@ void configureDependencies() => $initGetIt(getIt);
         ),
       ],
     ),
+    RedirectRoute(
+      path: '${ChapterPage.routeName}/:id',
+      redirectTo: '${QuranPage.routeName}/${ChapterPage.routeName}/:id',
+    ),
     AutoRoute(
       page: ChapterPage,
-      path: ChapterPage.routeName,
+      path: '${QuranPage.routeName}/${ChapterPage.routeName}/:id',
     ),
   ],
 )

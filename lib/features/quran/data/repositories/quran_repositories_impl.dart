@@ -27,6 +27,23 @@ class QuranRepositoriesImpl implements QuranRepositories {
   }
 
   @override
+  Future<Either<Failure, Chapter>> getChapter({
+    required int chapterNumber,
+    required String language,
+  }) async {
+    try {
+      final result = await _quranRemoteDatasources.getChapter(
+        chapterNumber: chapterNumber,
+        language: language,
+      );
+
+      return right(result);
+    } catch (e) {
+      return left(Failure(e.toString())..print());
+    }
+  }
+
+  @override
   Future<Either<Failure, Verses>> getVerses({
     required int chapterNumber,
     required QuranEdition edition,

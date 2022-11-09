@@ -7,6 +7,10 @@ abstract class QuranRepositories {
     required String language,
     required bool force,
   });
+  Future<Either<Failure, Chapter>> getChapter({
+    required int chapterNumber,
+    required String language,
+  });
   Future<Either<Failure, Verses>> getVerses({
     required int chapterNumber,
     required QuranEdition edition,

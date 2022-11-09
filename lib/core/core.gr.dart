@@ -30,12 +30,14 @@ class _$_AppRouter extends RootStackRouter {
       );
     },
     ChapterRoute.name: (routeData) {
-      final args = routeData.argsAs<ChapterRouteArgs>();
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<ChapterRouteArgs>(
+          orElse: () => ChapterRouteArgs(id: pathParams.getInt('id')));
       return MaterialPageX<dynamic>(
         routeData: routeData,
         child: ChapterPage(
           key: args.key,
-          chapter: args.chapter,
+          id: args.id,
         ),
       );
     },
@@ -112,8 +114,14 @@ class _$_AppRouter extends RootStackRouter {
           ],
         ),
         RouteConfig(
+          'chapter/:id#redirect',
+          path: 'chapter/:id',
+          redirectTo: 'quran/chapter/:id',
+          fullMatch: true,
+        ),
+        RouteConfig(
           ChapterRoute.name,
-          path: 'chapter',
+          path: 'quran/chapter/:id',
         ),
       ];
 }
@@ -148,14 +156,15 @@ class QuranRoute extends PageRouteInfo<void> {
 class ChapterRoute extends PageRouteInfo<ChapterRouteArgs> {
   ChapterRoute({
     Key? key,
-    required Chapter chapter,
+    required int id,
   }) : super(
           ChapterRoute.name,
-          path: 'chapter',
+          path: 'quran/chapter/:id',
           args: ChapterRouteArgs(
             key: key,
-            chapter: chapter,
+            id: id,
           ),
+          rawPathParams: {'id': id},
         );
 
   static const String name = 'ChapterRoute';
@@ -164,16 +173,16 @@ class ChapterRoute extends PageRouteInfo<ChapterRouteArgs> {
 class ChapterRouteArgs {
   const ChapterRouteArgs({
     this.key,
-    required this.chapter,
+    required this.id,
   });
 
   final Key? key;
 
-  final Chapter chapter;
+  final int id;
 
   @override
   String toString() {
-    return 'ChapterRouteArgs{key: $key, chapter: $chapter}';
+    return 'ChapterRouteArgs{key: $key, id: $id}';
   }
 }
 

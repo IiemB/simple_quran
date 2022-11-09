@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_quran/core/core.dart';
+import 'package:simple_quran/features/quran/quran.dart';
 import 'package:simple_quran/utils/utils.dart';
 
 class SplashPage extends StatelessWidget {
@@ -9,12 +9,7 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    3.seconds.whenComplete(
-          () => context.router.pushAndPopUntil(
-            const QuranRoute(),
-            predicate: (route) => false,
-          ),
-        );
+    3.seconds.whenComplete(() => context.router.pushNamed(QuranPage.routeName));
 
     return Scaffold(
       body: Center(child: Assets.icons.icon.image(width: 240)),

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -79,10 +80,10 @@ extension BuildContextExtension on BuildContext {
 
 extension CroasterThemeData on ThemeData {
   ThemeData get modified => copyWith(
-        pageTransitionsTheme: const PageTransitionsTheme(
+        pageTransitionsTheme: PageTransitionsTheme(
           builders: {
-            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-            TargetPlatform.android: _AppTransitionBuilder(),
+            for (final platform in TargetPlatform.values)
+              platform: const _AppTransitionBuilder(),
           },
         ),
         textTheme: textTheme.copyWith(
@@ -120,6 +121,10 @@ class _AppTransitionBuilder extends PageTransitionsBuilder {
     Animation<double> secondaryAnimation,
     Widget child,
   ) {
+    if (kIsWeb) {
+      return child;
+    }
+
     const begin = Offset(0.0, 1.0);
     const end = Offset.zero;
     const curve = Curves.ease;

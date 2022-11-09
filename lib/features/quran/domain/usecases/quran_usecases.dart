@@ -9,6 +9,7 @@ class QuranUsecases {
   const QuranUsecases._();
 
   static const getChapters = $GetChapters();
+  static const getChapter = $GetChapter();
   static const getVerses = $GetVerses();
 }
 
@@ -36,5 +37,18 @@ class $GetChapters {
       _repositories.getChapters(
         language: language,
         force: force,
+      );
+}
+
+class $GetChapter {
+  const $GetChapter();
+
+  Future<Either<Failure, Chapter>> call({
+    required int chapterNumber,
+    required String language,
+  }) =>
+      _repositories.getChapter(
+        chapterNumber: chapterNumber,
+        language: language,
       );
 }

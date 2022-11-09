@@ -5,6 +5,10 @@ abstract class QuranRemoteDatasources {
     required String language,
     required bool force,
   });
+  Future<Chapter> getChapter({
+    required int chapterNumber,
+    required String language,
+  });
   Future<Verses> getVerses({
     required int chapterNumber,
     required QuranEdition edition,
