@@ -1,16 +1,13 @@
 # simple_quran
 
-A new Flutter project.
+<img src="https://github.com/IiemB/simple_quran/blob/master/images/screen_1.jpg?raw=true" style="display: inline-block; margin: 0 auto; max-width: 300px">
 
-## Getting Started
+<img src="https://github.com/IiemB/simple_quran/blob/master/images/screen_2.jpg?raw=true" style="display: inline-block; margin: 0 auto; max-width: 300px">
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Features
+* Caching response data
+* Multiple theme mode
+* and Some basic feture
+# API Used
+* [Quran.com API](https://quran.api-docs.io/v4/)
+# Fork it and Make your own version 
