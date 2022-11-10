@@ -1,8 +1,6 @@
 # simple_quran
 
-<img src="https://github.com/IiemB/simple_quran/blob/master/images/screen_1.jpg?raw=true" style="display: inline-block; margin: 0 auto; max-width: 300px">
-
-<img src="https://github.com/IiemB/simple_quran/blob/master/images/screen_2.jpg?raw=true" style="display: inline-block; margin: 0 auto; max-width: 300px">
+<img src="https://github.com/IiemB/simple_quran/blob/master/images/screen_1.jpg?raw=true" style="display: inline-block; margin: 0 auto; max-width: 180"> <img src="https://github.com/IiemB/simple_quran/blob/master/images/screen_2.jpg?raw=true" style="display: inline-block; margin: 0 auto; max-width: 180">
 
 # Features
 * Caching response data
