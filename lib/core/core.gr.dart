@@ -10,60 +10,70 @@
 //
 // ignore_for_file: type=lint
 
-part of 'core.dart';
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:auto_route/auto_route.dart' as _i5;
+import 'package:auto_route/empty_router_widgets.dart' as _i3;
+import 'package:flutter/cupertino.dart' as _i7;
+import 'package:flutter/foundation.dart' as _i8;
+import 'package:flutter/material.dart' as _i6;
 
-class _$_AppRouter extends RootStackRouter {
-  _$_AppRouter([GlobalKey<NavigatorState>? navigatorKey]) : super(navigatorKey);
+import '../features/about/about.dart' as _i4;
+import '../features/quran/quran.dart' as _i2;
+import '../features/splash/splash.dart' as _i1;
+
+class AppRouter extends _i5.RootStackRouter {
+  AppRouter([_i6.GlobalKey<_i6.NavigatorState>? navigatorKey])
+      : super(navigatorKey);
 
   @override
-  final Map<String, PageFactory> pagesMap = {
+  final Map<String, _i5.PageFactory> pagesMap = {
     SplashRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(
+      return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const SplashPage(),
+        child: const _i1.SplashPage(),
       );
     },
     QuranRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(
+      return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const QuranPage(),
+        child: const _i2.QuranPage(),
       );
     },
     ChapterRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<ChapterRouteArgs>(
           orElse: () => ChapterRouteArgs(id: pathParams.getInt('id')));
-      return MaterialPageX<dynamic>(
+      return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: ChapterPage(
+        child: _i2.ChapterPage(
           key: args.key,
           id: args.id,
         ),
       );
     },
     AboutDrawerRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(
+      return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const EmptyRouterPage(),
+        child: const _i3.EmptyRouterPage(),
       );
     },
     AboutRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(
+      return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const AboutPage(),
+        child: const _i4.AboutPage(),
       );
     },
     LicensesRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(
+      return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const LicensesPage(),
+        child: const _i4.LicensesPage(),
       );
     },
     LicensesDetailRoute.name: (routeData) {
       final args = routeData.argsAs<LicensesDetailRouteArgs>();
-      return MaterialPageX<dynamic>(
+      return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: LicensesDetailPage(
+        child: _i4.LicensesDetailPage(
           key: args.key,
           packageName: args.packageName,
           licenseEntries: args.licenseEntries,
@@ -73,38 +83,31 @@ class _$_AppRouter extends RootStackRouter {
   };
 
   @override
-  List<RouteConfig> get routes => [
-        RouteConfig(
+  List<_i5.RouteConfig> get routes => [
+        _i5.RouteConfig(
           SplashRoute.name,
           path: '/',
         ),
-        RouteConfig(
+        _i5.RouteConfig(
           QuranRoute.name,
           path: 'quran',
           children: [
-            RouteConfig(
+            _i5.RouteConfig(
               AboutDrawerRoute.name,
-              path: 'aboutDrawerRoute',
+              path: 'about',
               parent: QuranRoute.name,
               children: [
-                RouteConfig(
-                  '#redirect',
+                _i5.RouteConfig(
+                  AboutRoute.name,
                   path: '',
                   parent: AboutDrawerRoute.name,
-                  redirectTo: 'about',
-                  fullMatch: true,
                 ),
-                RouteConfig(
-                  AboutRoute.name,
-                  path: 'about',
-                  parent: AboutDrawerRoute.name,
-                ),
-                RouteConfig(
+                _i5.RouteConfig(
                   LicensesRoute.name,
                   path: 'licenses',
                   parent: AboutDrawerRoute.name,
                 ),
-                RouteConfig(
+                _i5.RouteConfig(
                   LicensesDetailRoute.name,
                   path: 'lisenses-detail',
                   parent: AboutDrawerRoute.name,
@@ -113,13 +116,13 @@ class _$_AppRouter extends RootStackRouter {
             )
           ],
         ),
-        RouteConfig(
+        _i5.RouteConfig(
           'chapter/:id#redirect',
           path: 'chapter/:id',
           redirectTo: 'quran/chapter/:id',
           fullMatch: true,
         ),
-        RouteConfig(
+        _i5.RouteConfig(
           ChapterRoute.name,
           path: 'quran/chapter/:id',
         ),
@@ -127,8 +130,8 @@ class _$_AppRouter extends RootStackRouter {
 }
 
 /// generated route for
-/// [SplashPage]
-class SplashRoute extends PageRouteInfo<void> {
+/// [_i1.SplashPage]
+class SplashRoute extends _i5.PageRouteInfo<void> {
   const SplashRoute()
       : super(
           SplashRoute.name,
@@ -139,9 +142,9 @@ class SplashRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [QuranPage]
-class QuranRoute extends PageRouteInfo<void> {
-  const QuranRoute({List<PageRouteInfo>? children})
+/// [_i2.QuranPage]
+class QuranRoute extends _i5.PageRouteInfo<void> {
+  const QuranRoute({List<_i5.PageRouteInfo>? children})
       : super(
           QuranRoute.name,
           path: 'quran',
@@ -152,10 +155,10 @@ class QuranRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [ChapterPage]
-class ChapterRoute extends PageRouteInfo<ChapterRouteArgs> {
+/// [_i2.ChapterPage]
+class ChapterRoute extends _i5.PageRouteInfo<ChapterRouteArgs> {
   ChapterRoute({
-    Key? key,
+    _i7.Key? key,
     required int id,
   }) : super(
           ChapterRoute.name,
@@ -176,7 +179,7 @@ class ChapterRouteArgs {
     required this.id,
   });
 
-  final Key? key;
+  final _i7.Key? key;
 
   final int id;
 
@@ -187,12 +190,12 @@ class ChapterRouteArgs {
 }
 
 /// generated route for
-/// [EmptyRouterPage]
-class AboutDrawerRoute extends PageRouteInfo<void> {
-  const AboutDrawerRoute({List<PageRouteInfo>? children})
+/// [_i3.EmptyRouterPage]
+class AboutDrawerRoute extends _i5.PageRouteInfo<void> {
+  const AboutDrawerRoute({List<_i5.PageRouteInfo>? children})
       : super(
           AboutDrawerRoute.name,
-          path: 'aboutDrawerRoute',
+          path: 'about',
           initialChildren: children,
         );
 
@@ -200,20 +203,20 @@ class AboutDrawerRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [AboutPage]
-class AboutRoute extends PageRouteInfo<void> {
+/// [_i4.AboutPage]
+class AboutRoute extends _i5.PageRouteInfo<void> {
   const AboutRoute()
       : super(
           AboutRoute.name,
-          path: 'about',
+          path: '',
         );
 
   static const String name = 'AboutRoute';
 }
 
 /// generated route for
-/// [LicensesPage]
-class LicensesRoute extends PageRouteInfo<void> {
+/// [_i4.LicensesPage]
+class LicensesRoute extends _i5.PageRouteInfo<void> {
   const LicensesRoute()
       : super(
           LicensesRoute.name,
@@ -224,12 +227,12 @@ class LicensesRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [LicensesDetailPage]
-class LicensesDetailRoute extends PageRouteInfo<LicensesDetailRouteArgs> {
+/// [_i4.LicensesDetailPage]
+class LicensesDetailRoute extends _i5.PageRouteInfo<LicensesDetailRouteArgs> {
   LicensesDetailRoute({
-    Key? key,
+    _i7.Key? key,
     required String packageName,
-    required List<LicenseEntry> licenseEntries,
+    required List<_i8.LicenseEntry> licenseEntries,
   }) : super(
           LicensesDetailRoute.name,
           path: 'lisenses-detail',
@@ -250,11 +253,11 @@ class LicensesDetailRouteArgs {
     required this.licenseEntries,
   });
 
-  final Key? key;
+  final _i7.Key? key;
 
   final String packageName;
 
-  final List<LicenseEntry> licenseEntries;
+  final List<_i8.LicenseEntry> licenseEntries;
 
   @override
   String toString() {

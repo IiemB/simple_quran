@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/empty_router_widgets.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:simple_quran/core/core.config.dart';
@@ -10,11 +8,13 @@ import 'package:simple_quran/features/about/about.dart';
 import 'package:simple_quran/features/quran/quran.dart';
 import 'package:simple_quran/features/splash/splash.dart';
 import 'package:simple_quran/utils/utils.dart';
+import 'package:simple_quran/core/core.gr.dart';
 
-part 'core.gr.dart';
+export 'package:simple_quran/core/core.gr.dart';
+
+part 'app_routes.dart';
 
 final getIt = GetIt.instance;
-final appRoutes = getIt<AppRoutes>();
 
 final dio = Dio(
   BaseOptions(
@@ -30,58 +30,3 @@ final dio = Dio(
   asExtension: false, // default
 )
 void configureDependencies() => $initGetIt(getIt);
-
-@MaterialAutoRouter(
-  replaceInRouteName: 'Page,Route',
-  routes: <AutoRoute>[
-    AutoRoute(
-      initial: true,
-      page: SplashPage,
-      path: SplashPage.routeName,
-    ),
-    AutoRoute(
-      page: QuranPage,
-      path: QuranPage.routeName,
-      children: [
-        AutoRoute(
-          name: 'AboutDrawerRoute',
-          page: EmptyRouterPage,
-          path: 'aboutDrawerRoute',
-          children: [
-            RedirectRoute(
-              path: '',
-              redirectTo: AboutPage.routeName,
-            ),
-            AutoRoute(
-              initial: true,
-              page: AboutPage,
-              path: AboutPage.routeName,
-            ),
-            AutoRoute(
-              page: LicensesPage,
-              path: LicensesPage.routeName,
-            ),
-            AutoRoute(
-              page: LicensesDetailPage,
-              path: LicensesDetailPage.routeName,
-            ),
-          ],
-        ),
-      ],
-    ),
-    RedirectRoute(
-      path: '${ChapterPage.routeName}/:id',
-      redirectTo: '${QuranPage.routeName}/${ChapterPage.routeName}/:id',
-    ),
-    AutoRoute(
-      page: ChapterPage,
-      path: '${QuranPage.routeName}/${ChapterPage.routeName}/:id',
-    ),
-  ],
-)
-class _AppRouter extends _$_AppRouter {}
-
-@lazySingleton
-class AppRoutes {
-  final router = _AppRouter();
-}
