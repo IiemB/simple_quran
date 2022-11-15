@@ -47,7 +47,7 @@ class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
       final data = await getData();
 
       await JsonCacheManager.saveJson(jsonKey, data.toJson());
-      cacheChapters(data);
+      _cacheChapters(data);
 
       return data;
     } on DioError catch (e) {
@@ -140,7 +140,7 @@ class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
     return data;
   }
 
-  Future<void> cacheChapters(Chapters data) async {
+  Future<void> _cacheChapters(Chapters data) async {
     final chapters = data.chapters;
 
     if (chapters == null) {
@@ -162,6 +162,6 @@ class QuranRemoteDatasourcesImpl implements QuranRemoteDatasources {
       log('$jsonKey cached');
     }
 
-    log('all chapters saved');
+    log('all chapters cached');
   }
 }
