@@ -9,7 +9,9 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    3.seconds.whenComplete(() => context.router.pushNamed(QuranPage.routeName));
+    3
+        .seconds
+        .whenComplete(() => context.router.replaceNamed(QuranPage.routeName));
 
     return Scaffold(
       body: Center(child: Assets.icons.icon.image(width: 240)),

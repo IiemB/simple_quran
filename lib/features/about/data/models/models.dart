@@ -1,1 +1,1 @@
-export 'license_data_model/license_data_model.dart';
+export 'licenses_data/licenses_data.dart';
